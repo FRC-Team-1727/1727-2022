@@ -15,11 +15,11 @@ package frc.robot;
 public final class Constants {
 
     public static final class DriveConstants {
-        public static final int[] kLDrivePort = new int[] {1, 2};
+        public static final int[] kLDrivePort = new int[] {1, 3};
         public static final int[] kLEncoderPort = new int[] {0, 1};
         public static final boolean kLEncoderReverse = false;
         
-        public static final int[] kRDrivePort = new int[] {3, 4};
+        public static final int[] kRDrivePort = new int[] {4, 6};
         public static final int[] kREncoderPort = new int[] {4, 5};
         public static final boolean kREncoderReverse = true;
 
@@ -36,6 +36,16 @@ public final class Constants {
     public static final class XboxConstants {
         public static final int kXboxPort = 0;
         public static final double kTriggerThreshold = 0.2;
+    }
+
+    public static final class ShooterConstants {
+        public static final int[] kFlywheelPort = new int[] {8,9};
+        public static final int kFlywheelEncoderPort = 10;
+
+        public static final double kP = 0;
+        public static final double kI = 0;
+        public static final double kD = 0;
+        public static final double kF = 0;
     }
 
 }
