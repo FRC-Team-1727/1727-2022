@@ -12,4 +12,30 @@ package frc.robot;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
-public final class Constants {}
+public final class Constants {
+
+    public static final class DriveConstants {
+        public static final int[] kLDrivePort = new int[] {1, 2};
+        public static final int[] kLEncoderPort = new int[] {0, 1};
+        public static final boolean kLEncoderReverse = false;
+        
+        public static final int[] kRDrivePort = new int[] {3, 4};
+        public static final int[] kREncoderPort = new int[] {4, 5};
+        public static final boolean kREncoderReverse = true;
+
+        public static final double kThreshold = 0.2;
+
+        public static final double kWheelDiameter = 6; //replace this with empirical wheel diameter after finding it
+    }
+
+    public static final class IntakeConstants {
+        public static final int kIntakePort = 5;
+        public static final int[] kIntakePistonPort = new int[] {6,7};
+    }
+
+    public static final class XboxConstants {
+        public static final int kXboxPort = 0;
+        public static final double kTriggerThreshold = 0.2;
+    }
+
+}
