@@ -5,7 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.MotorFeedbackSensor;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -22,7 +22,7 @@ public class ShooterSubsystem extends SubsystemBase {
     new CANSparkMax(kFlywheelPort[1], MotorType.kBrushless)
   };
 
-  private MotorFeedbackSensor encoder = flywheel[0].getEncoder();
+  private RelativeEncoder encoder = flywheel[0].getEncoder();
   private SparkMaxPIDController controller = flywheel[0].getPIDController();
 
   /** Creates a new ShooterSubsystem. */
