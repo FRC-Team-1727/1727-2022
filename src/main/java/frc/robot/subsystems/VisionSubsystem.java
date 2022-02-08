@@ -19,6 +19,10 @@ public class VisionSubsystem extends SubsystemBase {
   public double getAngleX() {
     return table.getEntry("tx").getDouble(0);
   }
+  
+  public double getAngleY() {
+    return table.getEntry("ty").getDouble(0);
+  }
 
   public double getArea() {
     return table.getEntry("ta").getDouble(0);

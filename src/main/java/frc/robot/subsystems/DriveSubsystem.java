@@ -9,11 +9,15 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import static frc.robot.Constants.DriveConstants.*;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Encoder;
 
 public class DriveSubsystem extends SubsystemBase {
+
+    public PIDController pid;
+    public boolean aiming = false;
 
     private CANSparkMax[] lDrive = new CANSparkMax[]{
             new CANSparkMax(kLDrivePort[0], MotorType.kBrushless),
@@ -75,5 +79,14 @@ public class DriveSubsystem extends SubsystemBase {
     private void setDrive(double left, double right) {
         setLDrive(left);
         setRDrive(right);
+    }
+
+    //vision aiming
+
+    public void aim(double angle) {
+        if(aiming) {
+            double spd = pid.calculate(angle);
+            setDrive(spd, -spd);
+        }
     }
 }
