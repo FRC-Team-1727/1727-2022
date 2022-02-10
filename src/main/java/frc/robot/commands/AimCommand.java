@@ -5,23 +5,30 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.DriveSubsystem;
-import edu.wpi.first.math.controller.PIDController;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.VisionSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import static frc.robot.Constants.AimConstants.*;
 
 /** An example command that uses an example subsystem. */
 public class AimCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final DriveSubsystem m_subsystem;
+
+  private final DriveSubsystem m_driveSubsystem;
+  private final VisionSubsystem m_visionSubsystem;
+  private final ShooterSubsystem m_shooterSubsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public AimCommand(DriveSubsystem subsystem) {
-    m_subsystem = subsystem;
+  public AimCommand(DriveSubsystem dsubsystem, VisionSubsystem vsubsystem, ShooterSubsystem ssubsystem) {
+    m_driveSubsystem = dsubsystem;
+    m_visionSubsystem = vsubsystem;
+    m_shooterSubsystem = ssubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    addRequirements(dsubsystem, vsubsystem, ssubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -31,8 +38,8 @@ public class AimCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.pid = new PIDController(0, 0, 0); 
-    m_subsystem.aiming = true;
+    m_driveSubsystem.aim(m_visionSubsystem.getAngleX());
+    m_shooterSubsystem.aim(kVisionHeight / Math.tan(kVisionAngle + m_visionSubsystem.getAngleY()));
   }
 
   // Called once the command ends or is interrupted.

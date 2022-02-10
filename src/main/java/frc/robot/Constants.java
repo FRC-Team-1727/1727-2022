@@ -30,7 +30,10 @@ public final class Constants {
 
     public static final class IntakeConstants {
         public static final int kIntakePort = 5;
-        public static final int[] kIntakePistonPort = new int[] {6,7};
+        public static final int[][] kIntakePistonPort = new int[][] {
+            {6,7},
+            {8,9}
+        };
     }
 
     public static final class XboxConstants {
@@ -41,11 +44,23 @@ public final class Constants {
     public static final class ShooterConstants {
         public static final int[] kFlywheelPort = new int[] {8,9};
         public static final int kFlywheelEncoderPort = 10;
+        public static final int[] kHoodPistonPort = new int[] {11,12};
 
         public static final double kP = 0;
         public static final double kI = 0;
         public static final double kD = 0;
         public static final double kF = 0;
+
+        public static final double kHoodChangeThreshold = 0;
+    }
+
+    public static final class AimConstants {
+        public static final double kVisionAngle = 45;
+        public static final double kVisionHeight = 104 - 18; //reflective tape height = 8'8" or 104"
+
+        public static final double kP = 0;
+        public static final double kI = 0;
+        public static final double kD = 0;
     }
 
 }

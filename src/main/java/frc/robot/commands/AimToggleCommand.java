@@ -5,32 +5,26 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.DriveSubsystem;
-
-import java.util.function.DoubleSupplier;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import static frc.robot.Constants.AimConstants.*;
 
-public class DriveCommand extends CommandBase {
+/** An example command that uses an example subsystem. */
+public class AimToggleCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-
   private final DriveSubsystem m_subsystem;
+  private boolean aiming;
 
-  private final DoubleSupplier x;
-  private final DoubleSupplier y;
-
-  /**
-   * Creates a new ExampleCommand.
+  /*
+   * Creates a new AimToggleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public DriveCommand(DriveSubsystem subsystem, DoubleSupplier x, DoubleSupplier y) {
+  public AimToggleCommand(DriveSubsystem subsystem, boolean aiming) {
     m_subsystem = subsystem;
-
-    this.x = x;
-    this.y = y;
-    
+    this.aiming = aiming;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
-
   }
 
   // Called when the command is initially scheduled.
@@ -40,7 +34,11 @@ public class DriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.arcade(x.getAsDouble(), y.getAsDouble());
+    if(aiming) {
+      m_subsystem.pid = new PIDController(kP, kI, kD);
+    } else {
+      m_subsystem.pid.close();
+    }
   }
 
   // Called once the command ends or is interrupted.

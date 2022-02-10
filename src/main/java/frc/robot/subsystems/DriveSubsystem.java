@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj.Encoder;
 public class DriveSubsystem extends SubsystemBase {
 
     public PIDController pid;
-    public boolean aiming = false;
 
     private CANSparkMax[] lDrive = new CANSparkMax[]{
             new CANSparkMax(kLDrivePort[0], MotorType.kBrushless),
@@ -84,9 +83,7 @@ public class DriveSubsystem extends SubsystemBase {
     //vision aiming
 
     public void aim(double angle) {
-        if(aiming) {
-            double spd = pid.calculate(angle);
-            setDrive(spd, -spd);
-        }
+        double spd = pid.calculate(angle);
+        setDrive(spd, -spd);
     }
 }

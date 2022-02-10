@@ -13,6 +13,9 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import static frc.robot.Constants.ShooterConstants.*;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -25,6 +28,7 @@ public class ShooterSubsystem extends SubsystemBase {
   private RelativeEncoder encoder = flywheel[0].getEncoder();
   private SparkMaxPIDController controller = flywheel[0].getPIDController();
 
+  private DoubleSolenoid hoodPiston = new DoubleSolenoid(PneumaticsModuleType.REVPH, kHoodPistonPort[0], kHoodPistonPort[1]);
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
     flywheel[1].follow(flywheel[0], true);
@@ -52,6 +56,19 @@ public class ShooterSubsystem extends SubsystemBase {
     controller.setI(kI);
     controller.setD(kD);
     controller.setFF(kF);
+  }
+
+  public void aim(double distance) {
+    //set hood
+    if (distance > kHoodChangeThreshold) {
+      hoodPiston.set(kForward);
+    } else {
+      hoodPiston.set(kReverse);
+    }
+
+    //set flywheel speed
+    //do math based on distance
+    // controller.setReference(0, ControlType.kVelocity);
   }
 
   @Override
