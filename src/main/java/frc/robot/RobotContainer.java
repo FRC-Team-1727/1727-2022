@@ -42,6 +42,7 @@ public class RobotContainer {
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   private final VisionSubsystem m_visionSubsystem = new VisionSubsystem();
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 

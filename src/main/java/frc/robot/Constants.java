@@ -63,4 +63,9 @@ public final class Constants {
         public static final double kD = 0;
     }
 
+    public static final class ClimbConstants {
+        public static final int[] kClimbPort = new int[] {13,14};
+        public static final double kClimbSpeed =  1;
+    }
+
 }
