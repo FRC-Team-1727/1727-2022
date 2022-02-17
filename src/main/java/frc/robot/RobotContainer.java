@@ -43,6 +43,7 @@ public class RobotContainer {
   private final VisionSubsystem m_visionSubsystem = new VisionSubsystem();
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
+  private final UptakeSubsystem m_uptakeSubsystem = new UptakeSubsystem();
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
@@ -55,6 +56,7 @@ public class RobotContainer {
     // default commands
     m_driveSubsystem.setDefaultCommand(new DriveCommand(m_driveSubsystem,()->-xbox.getRightY(), ()->xbox.getLeftX())); // this is the old code, not sure why it doesn't work.
     m_intakeSubsystem.setDefaultCommand(new IntakeCommand(m_intakeSubsystem,()->xbox.getRightTriggerAxis()));
+    m_uptakeSubsystem.setDefaultCommand(new UptakeCommand(m_uptakeSubsystem, ()->xbox.getLeftTriggerAxis()));
     m_climbSubsystem.setDefaultCommand(new ClimbCommand(m_climbSubsystem, xbox.getPOV()));
   }
 

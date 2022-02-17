@@ -10,9 +10,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import static frc.robot.Constants.DriveConstants.*;
 
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.Encoder;
 
 public class DriveSubsystem extends SubsystemBase {
 
@@ -28,13 +26,9 @@ public class DriveSubsystem extends SubsystemBase {
             new CANSparkMax(kRDrivePort[1], MotorType.kBrushless)
     };
 
-    private Encoder lEncoder = new Encoder(kLEncoderPort[0], kLEncoderPort[1], kLEncoderReverse, CounterBase.EncodingType.k4X);
-    private Encoder rEncoder = new Encoder(kREncoderPort[0], kREncoderPort[1], kREncoderReverse, CounterBase.EncodingType.k4X);
-
-
     public DriveSubsystem() {
-        lEncoder.setDistancePerPulse(kWheelDiameter * Math.PI / 256);
-        rEncoder.setDistancePerPulse(kWheelDiameter * Math.PI / 256);
+        // lEncoder.setDistancePerPulse(kWheelDiameter * Math.PI / 256);
+        // rEncoder.setDistancePerPulse(kWheelDiameter * Math.PI / 256);
     }
 
     @Override
@@ -83,7 +77,7 @@ public class DriveSubsystem extends SubsystemBase {
     //vision aiming
 
     public void aim(double angle) {
-        double spd = pid.calculate(angle);
+        double spd = pid.calculate(angle); //use pid.setSetpoint?
         setDrive(spd, -spd);
     }
 }
