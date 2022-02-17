@@ -17,9 +17,16 @@ public class ClimbCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ClimbCommand(ClimbSubsystem subsystem, int speed) {
+  public ClimbCommand(ClimbSubsystem subsystem, int pov) {
     m_subsystem = subsystem;
-    this.speed = speed;
+    if (pov == -1) {
+      speed = 0;
+    } else if (pov > 270 || pov < 90) {
+      speed = 1;
+    } else {
+      speed = -1;
+    }
+    speed = pov;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }

@@ -55,6 +55,7 @@ public class RobotContainer {
     // default commands
     m_driveSubsystem.setDefaultCommand(new DriveCommand(m_driveSubsystem,()->-xbox.getRightY(), ()->xbox.getLeftX())); // this is the old code, not sure why it doesn't work.
     m_intakeSubsystem.setDefaultCommand(new IntakeCommand(m_intakeSubsystem,()->xbox.getRightTriggerAxis()));
+    m_climbSubsystem.setDefaultCommand(new ClimbCommand(m_climbSubsystem, xbox.getPOV()));
   }
 
   /**

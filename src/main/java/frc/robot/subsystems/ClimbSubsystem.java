@@ -19,9 +19,8 @@ public class ClimbSubsystem extends SubsystemBase {
   public ClimbSubsystem() {}
 
   public void move(int speed) {
-    for(VictorSPX m : motors) {
-      m.set(ControlMode.PercentOutput, speed*kClimbSpeed);
-    }
+    motors[0].set(ControlMode.PercentOutput, speed*kClimbSpeed);
+    motors[1].set(ControlMode.PercentOutput, -speed*kClimbSpeed);
   }
 
   @Override
