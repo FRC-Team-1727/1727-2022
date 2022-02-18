@@ -41,7 +41,7 @@ public final class Constants {
     }
 
     public static final class ShooterConstants {
-        public static final int[] kFlywheelPort = new int[] {7,8};
+        public static final int[] kFlywheelPort = new int[] {8,7};
         public static final int kFlywheelEncoderPort = 10;
         public static final int[] kHoodPistonPort = new int[] {11,12};
 
@@ -51,6 +51,8 @@ public final class Constants {
         public static final double kF = 0;
 
         public static final double kHoodChangeThreshold = 0;
+
+        public static final double kDefaultSpeed = 3000;
     }
 
     public static final class AimConstants {

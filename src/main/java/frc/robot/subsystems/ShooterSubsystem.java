@@ -29,6 +29,9 @@ public class ShooterSubsystem extends SubsystemBase {
   private SparkMaxPIDController controller = flywheel[0].getPIDController();
 
   private DoubleSolenoid hoodPiston = new DoubleSolenoid(PneumaticsModuleType.REVPH, kHoodPistonPort[0], kHoodPistonPort[1]);
+
+  private double curSpeed;
+
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
     flywheel[1].follow(flywheel[0], true);
@@ -40,10 +43,16 @@ public class ShooterSubsystem extends SubsystemBase {
     controller.setFeedbackDevice(encoder);
     stop();
     updateConstants();
+    curSpeed = kDefaultSpeed;
+  }
+
+  public void move() {
+    controller.setReference(curSpeed, ControlType.kVelocity);
   }
 
   public void setSpeed(double spd) {
     controller.setReference(spd, ControlType.kVelocity);
+    curSpeed = spd;
   }
 
   public void stop() {
