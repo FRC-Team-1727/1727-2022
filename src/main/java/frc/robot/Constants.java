@@ -24,7 +24,7 @@ public final class Constants {
     }
 
     public static final class IntakeConstants {
-        public static final int kIntakePort = 5;
+        public static final int kIntakePort = 2;
         public static final int[][] kIntakePistonPort = new int[][] {
             {6,7},
             {8,9}
@@ -32,7 +32,7 @@ public final class Constants {
     }
 
     public static final class UptakeConstants {
-        public static final int kUptakePort = 9;
+        public static final int kUptakePort = 5;
     }
 
     public static final class XboxConstants {

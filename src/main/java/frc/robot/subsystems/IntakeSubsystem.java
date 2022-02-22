@@ -4,10 +4,12 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 
 import static frc.robot.Constants.IntakeConstants.*;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -16,7 +18,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class IntakeSubsystem extends SubsystemBase {
   
-  private CANSparkMax intake = new CANSparkMax(kIntakePort, MotorType.kBrushless);
+  private VictorSPX intake = new VictorSPX(kIntakePort);
   private DoubleSolenoid[] pistons = new DoubleSolenoid[]{
     new DoubleSolenoid(PneumaticsModuleType.REVPH, kIntakePistonPort[0][0], kIntakePistonPort[0][1]),
     new DoubleSolenoid(PneumaticsModuleType.REVPH, kIntakePistonPort[1][0], kIntakePistonPort[1][1])
@@ -29,7 +31,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void intake(double spd) {
-    intake.set(spd);
+    intake.set(ControlMode.PercentOutput, -spd);
   }
 
   public void togglePiston()
