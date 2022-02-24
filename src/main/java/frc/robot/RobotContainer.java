@@ -54,7 +54,7 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     // default commands
-    m_driveSubsystem.setDefaultCommand(new DriveCommand(m_driveSubsystem,()->-xbox.getRightY(), ()->xbox.getLeftX())); // this is the old code, not sure why it doesn't work.
+    m_driveSubsystem.setDefaultCommand(new DriveCommand(m_driveSubsystem,()->-xbox.getLeftX(), ()->xbox.getRightY()));
     m_intakeSubsystem.setDefaultCommand(new IntakeCommand(m_intakeSubsystem,()->xbox.getRightTriggerAxis()));
     m_uptakeSubsystem.setDefaultCommand(new UptakeCommand(m_uptakeSubsystem, ()->xbox.getLeftTriggerAxis()));
     m_climbSubsystem.setDefaultCommand(new ClimbCommand(m_climbSubsystem, xbox.getPOV()));
