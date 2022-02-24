@@ -58,6 +58,7 @@ public class RobotContainer {
     m_intakeSubsystem.setDefaultCommand(new IntakeCommand(m_intakeSubsystem,()->xbox.getRightTriggerAxis()));
     m_uptakeSubsystem.setDefaultCommand(new UptakeCommand(m_uptakeSubsystem, ()->xbox.getLeftTriggerAxis()));
     m_climbSubsystem.setDefaultCommand(new ClimbCommand(m_climbSubsystem, xbox.getPOV()));
+    m_shooterSubsystem.setDefaultCommand(new ShooterCommand(m_shooterSubsystem));
   }
 
   /**
@@ -75,8 +76,8 @@ public class RobotContainer {
     new JoystickButton(xbox, Button.kLeftBumper.value).whenReleased(new AimToggleCommand(m_driveSubsystem, false));
 
     //flywheel test speeds
-    new JoystickButton(xbox, Button.kStart.value).whenPressed(new ShooterCommand(m_shooterSubsystem, 3000));
-    new JoystickButton(xbox, Button.kBack.value).whenPressed(new ShooterCommand(m_shooterSubsystem, 0));
+    new JoystickButton(xbox, Button.kStart.value).whenPressed(new ShooterSpeedCommand(m_shooterSubsystem, 3000));
+    new JoystickButton(xbox, Button.kBack.value).whenPressed(new ShooterSpeedCommand(m_shooterSubsystem, 0));
   }
 
   /**
