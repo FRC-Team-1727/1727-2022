@@ -45,9 +45,9 @@ public final class Constants {
         public static final int kFlywheelEncoderPort = 10;
         public static final int[] kHoodPistonPort = new int[] {11,12};
 
-        public static final double kP = 0;
-        public static final double kI = 0;
-        public static final double kD = 0;
+        public static final double kP = 0.0008;
+        public static final double kI = 0.000002;
+        public static final double kD = 2;
         public static final double kF = 0;
 
         public static final double kHoodChangeThreshold = 0;
@@ -56,11 +56,11 @@ public final class Constants {
     }
 
     public static final class AimConstants {
-        public static final double kVisionAngle = 45;
-        public static final double kVisionHeight = 104 - 18; //reflective tape height = 8'8" or 104"
-        public static final double kHubRadius = 24;
+        public static final double kVisionAngle = 33;
+        public static final double kVisionHeight = 104 - 23; //reflective tape height = 8'8" or 104"
+        public static final double kHubRadius = 34;
 
-        public static final double kP = 0;
+        public static final double kP = 0.02;
         public static final double kI = 0;
         public static final double kD = 0;
     }
