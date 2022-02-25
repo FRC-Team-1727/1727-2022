@@ -4,10 +4,13 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.DriveSubsystem;
+import static frc.robot.Constants.AimConstants.kD;
+import static frc.robot.Constants.AimConstants.kI;
+import static frc.robot.Constants.AimConstants.kP;
+
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import static frc.robot.Constants.AimConstants.*;
+import frc.robot.subsystems.DriveSubsystem;
 
 /** An example command that uses an example subsystem. */
 public class AimToggleCommand extends CommandBase {
@@ -36,6 +39,7 @@ public class AimToggleCommand extends CommandBase {
   public void execute() {
     if(aiming) {
       m_subsystem.pid = new PIDController(kP, kI, kD);
+      m_subsystem.pid.setSetpoint(0);
     } else {
       m_subsystem.pid.close();
     }

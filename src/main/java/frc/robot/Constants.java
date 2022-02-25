@@ -56,7 +56,7 @@ public final class Constants {
     }
 
     public static final class AimConstants {
-        public static final double kVisionAngle = 33;
+        public static final double kVisionAngle = 57;
         public static final double kVisionHeight = 104 - 23; //reflective tape height = 8'8" or 104"
         public static final double kHubRadius = 34;
 
