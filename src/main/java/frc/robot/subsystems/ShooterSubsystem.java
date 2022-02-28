@@ -80,6 +80,11 @@ public class ShooterSubsystem extends SubsystemBase {
     // controller.setReference(0, ControlType.kVelocity);
   }
 
+  public void increment(double speed) {
+    curSpeed += speed;
+    controller.setReference(curSpeed, ControlType.kVelocity);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
