@@ -20,8 +20,8 @@ public class IntakeSubsystem extends SubsystemBase {
   
   private VictorSPX intake = new VictorSPX(kIntakePort);
   private DoubleSolenoid[] pistons = new DoubleSolenoid[]{
-    new DoubleSolenoid(PneumaticsModuleType.REVPH, kIntakePistonPort[0][0], kIntakePistonPort[0][1]),
-    new DoubleSolenoid(PneumaticsModuleType.REVPH, kIntakePistonPort[1][0], kIntakePistonPort[1][1])
+    new DoubleSolenoid(PneumaticsModuleType.CTREPCM, kIntakePistonPort[0][0], kIntakePistonPort[0][1]),
+    new DoubleSolenoid(PneumaticsModuleType.CTREPCM, kIntakePistonPort[1][0], kIntakePistonPort[1][1])
   };
   
   public IntakeSubsystem() {

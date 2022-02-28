@@ -28,7 +28,7 @@ public class ShooterSubsystem extends SubsystemBase {
   private RelativeEncoder encoder = flywheel[0].getEncoder();
   private SparkMaxPIDController controller = flywheel[0].getPIDController();
 
-  private DoubleSolenoid hoodPiston = new DoubleSolenoid(PneumaticsModuleType.REVPH, kHoodPistonPort[0], kHoodPistonPort[1]);
+  private DoubleSolenoid hoodPiston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, kHoodPistonPort[0], kHoodPistonPort[1]);
 
   private double curSpeed;
 
