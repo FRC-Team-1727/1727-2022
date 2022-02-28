@@ -52,7 +52,7 @@ public final class Constants {
 
         public static final double kHoodChangeThreshold = 0;
 
-        public static final double kDefaultSpeed = 3000;
+        public static final double kDefaultSpeed = 0;
     }
 
     public static final class AimConstants {
