@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import static frc.robot.Constants.ClimbConstants.*;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -16,7 +17,11 @@ public class ClimbSubsystem extends SubsystemBase {
   };
   
   /** Creates a new ClimbSubsystem. */
-  public ClimbSubsystem() {}
+  public ClimbSubsystem() {
+    for(VictorSPX m : motors) {
+      m.setNeutralMode(NeutralMode.Brake);
+    }
+  }
 
   public void move(int speed) {
     motors[0].set(ControlMode.PercentOutput, speed*kClimbSpeed);
