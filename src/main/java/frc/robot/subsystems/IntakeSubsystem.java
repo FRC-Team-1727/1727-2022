@@ -26,7 +26,7 @@ public class IntakeSubsystem extends SubsystemBase {
   
   public IntakeSubsystem() {
     for(DoubleSolenoid p : pistons) {
-      p.set(kForward);
+      p.set(kReverse);
     }
   }
 

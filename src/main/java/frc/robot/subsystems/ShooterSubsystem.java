@@ -44,6 +44,7 @@ public class ShooterSubsystem extends SubsystemBase {
     stop();
     updateConstants();
     curSpeed = kDefaultSpeed;
+    hoodPiston.set(kReverse);
   }
 
   public void move() {
