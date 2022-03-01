@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import static frc.robot.Constants.DriveConstants.*;
+import static frc.robot.Constants.AimConstants.*;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -58,14 +59,14 @@ public class DriveSubsystem extends SubsystemBase {
     private void setLDrive(double spd) {
         //move lDrive
         for (CANSparkMax m : lDrive) {
-            m.set(spd);
+            m.set(-spd);
         }
     }
 
     private void setRDrive(double spd) {
         //move rDrive
         for (CANSparkMax m : rDrive) {
-            m.set(-spd);
+            m.set(spd);
         }
     }
 
@@ -77,7 +78,10 @@ public class DriveSubsystem extends SubsystemBase {
     //vision aiming
 
     public void aim(double angle) {
-        double spd = pid.calculate(angle); //use pid.setSetpoint?
-        setDrive(spd, -spd);
+        if(pid != null) {
+            double spd = pid.calculate(angle); //use pid.setSetpoint?
+            setDrive(spd, -spd);
+        }
+        setDrive(-angle * kP, angle * kP);
     }
 }

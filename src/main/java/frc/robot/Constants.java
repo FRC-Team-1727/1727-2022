@@ -24,10 +24,10 @@ public final class Constants {
     }
 
     public static final class IntakeConstants {
-        public static final int kIntakePort = 2;
+        public static final int kIntakePort = 4;
         public static final int[][] kIntakePistonPort = new int[][] {
-            {6,7},
-            {8,9}
+            {2,3},
+            {6,7}
         };
     }
 
@@ -43,7 +43,7 @@ public final class Constants {
     public static final class ShooterConstants {
         public static final int[] kFlywheelPort = new int[] {8,7};
         public static final int kFlywheelEncoderPort = 10;
-        public static final int[] kHoodPistonPort = new int[] {11,12};
+        public static final int[] kHoodPistonPort = new int[] {0,1};
 
         public static final double kP = 0.0008;
         public static final double kI = 0.000002;
@@ -66,7 +66,7 @@ public final class Constants {
     }
 
     public static final class ClimbConstants {
-        public static final int[] kClimbPort = new int[] {13,14};
+        public static final int[] kClimbPort = new int[] {2,1};
         public static final double kClimbSpeed =  1;
     }
 

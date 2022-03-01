@@ -41,7 +41,7 @@ public class AimToggleCommand extends CommandBase {
       m_subsystem.pid = new PIDController(kP, kI, kD);
       m_subsystem.pid.setSetpoint(0);
     } else {
-      m_subsystem.pid.close();
+      m_subsystem.aim(0);
     }
   }
 

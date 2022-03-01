@@ -57,8 +57,9 @@ public class RobotContainer {
     m_driveSubsystem.setDefaultCommand(new DriveCommand(m_driveSubsystem,()->-xbox.getLeftX(), ()->xbox.getRightY()));
     m_intakeSubsystem.setDefaultCommand(new IntakeCommand(m_intakeSubsystem,()->xbox.getRightTriggerAxis()));
     m_uptakeSubsystem.setDefaultCommand(new UptakeCommand(m_uptakeSubsystem, ()->xbox.getLeftTriggerAxis()));
-    m_climbSubsystem.setDefaultCommand(new ClimbCommand(m_climbSubsystem, xbox.getPOV()));
+    // m_climbSubsystem.setDefaultCommand(new ClimbCommand(m_climbSubsystem, xbox.getPOV()));
     m_shooterSubsystem.setDefaultCommand(new ShooterCommand(m_shooterSubsystem));
+    // m_climbSubsystem.setDefaultCommand(new ClimbMoveCommand(m_climbSubsystem, ()->xbox.getLeftTriggerAxis()));
   }
 
   /**
@@ -71,13 +72,15 @@ public class RobotContainer {
     new JoystickButton(xbox, Button.kRightBumper.value).whenPressed(new IntakePistonCommand(m_intakeSubsystem));
 
     //aiming
-    new JoystickButton(xbox, Button.kLeftBumper.value).whenPressed(new AimToggleCommand(m_driveSubsystem, true));
+    // new JoystickButton(xbox, Button.kLeftBumper.value).whenPressed(new AimToggleCommand(m_driveSubsystem, true));
     new JoystickButton(xbox, Button.kLeftBumper.value).whileHeld(new AimCommand(m_driveSubsystem, m_visionSubsystem, m_shooterSubsystem));
-    new JoystickButton(xbox, Button.kLeftBumper.value).whenReleased(new AimToggleCommand(m_driveSubsystem, false));
+    // new JoystickButton(xbox, Button.kLeftBumper.value).whenReleased(new AimToggleCommand(m_driveSubsystem, false));
 
     //flywheel test speeds
     new JoystickButton(xbox, Button.kStart.value).whenPressed(new ShooterSpeedCommand(m_shooterSubsystem, 3000));
     new JoystickButton(xbox, Button.kBack.value).whenPressed(new ShooterSpeedCommand(m_shooterSubsystem, 0));
+    // new JoystickButton(xbox, Button.kA.value).whenPressed(new ClimbMoveCommand(m_climbSubsystem, -1));
+    // new JoystickButton(xbox, Button.kA.value).whenPressed(new ClimbMoveCommand(m_climbSubsystem, 1));
   }
 
   /**

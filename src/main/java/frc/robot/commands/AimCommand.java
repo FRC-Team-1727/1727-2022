@@ -39,7 +39,7 @@ public class AimCommand extends CommandBase {
   @Override
   public void execute() {
     m_driveSubsystem.aim(m_visionSubsystem.getAngleX());
-    m_shooterSubsystem.aim(kVisionHeight / Math.tan(kVisionAngle + m_visionSubsystem.getAngleY()) + kHubRadius);
+    // m_shooterSubsystem.aim(kVisionHeight / Math.tan(kVisionAngle + m_visionSubsystem.getAngleY()) + kHubRadius);
   }
 
   // Called once the command ends or is interrupted.

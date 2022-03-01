@@ -23,7 +23,7 @@ public class ClimbSubsystem extends SubsystemBase {
     }
   }
 
-  public void move(int speed) {
+  public void move(double speed) {
     motors[0].set(ControlMode.PercentOutput, speed*kClimbSpeed);
     motors[1].set(ControlMode.PercentOutput, -speed*kClimbSpeed);
   }
