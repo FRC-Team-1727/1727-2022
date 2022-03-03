@@ -38,7 +38,9 @@ public class AimCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_driveSubsystem.aim(m_visionSubsystem.getAngleX());
+    if(m_visionSubsystem.hasTarget()) {
+      m_driveSubsystem.aim(m_visionSubsystem.getAngleX());
+    }
     // m_shooterSubsystem.aim(kVisionHeight / Math.tan(kVisionAngle + m_visionSubsystem.getAngleY()) + kHubRadius);
   }
 

@@ -34,8 +34,7 @@ public class IntakeSubsystem extends SubsystemBase {
     intake.set(ControlMode.PercentOutput, -spd);
   }
 
-  public void togglePiston()
-  {
+  public void togglePiston() {
     for(DoubleSolenoid p : pistons) {
       p.toggle();
     }

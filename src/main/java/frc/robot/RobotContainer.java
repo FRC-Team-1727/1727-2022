@@ -77,7 +77,7 @@ public class RobotContainer {
     // new JoystickButton(xbox, Button.kLeftBumper.value).whenReleased(new AimToggleCommand(m_driveSubsystem, false));
 
     //flywheel test speeds
-    new JoystickButton(xbox, Button.kStart.value).whenPressed(new ShooterSpeedCommand(m_shooterSubsystem, 3000));
+    new JoystickButton(xbox, Button.kStart.value).whenPressed(new ShooterSpeedCommand(m_shooterSubsystem, 2900));
     new JoystickButton(xbox, Button.kBack.value).whenPressed(new ShooterSpeedCommand(m_shooterSubsystem, 0));
     // new JoystickButton(xbox, Button.kA.value).whenPressed(new ClimbMoveCommand(m_climbSubsystem, -1));
     // new JoystickButton(xbox, Button.kA.value).whenPressed(new ClimbMoveCommand(m_climbSubsystem, 1));
