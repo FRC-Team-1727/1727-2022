@@ -81,6 +81,13 @@ public class RobotContainer {
     new JoystickButton(xbox, Button.kBack.value).whenPressed(new ShooterSpeedCommand(m_shooterSubsystem, 0));
     // new JoystickButton(xbox, Button.kA.value).whenPressed(new ClimbMoveCommand(m_climbSubsystem, -1));
     // new JoystickButton(xbox, Button.kA.value).whenPressed(new ClimbMoveCommand(m_climbSubsystem, 1));
+
+    //individual intake piston testing
+    // new JoystickButton(xbox, Button.kY.value).whenPressed(new IntakePistonTestCommand(m_intakeSubsystem, 0, true));
+    // new JoystickButton(xbox, Button.kA.value).whenPressed(new IntakePistonTestCommand(m_intakeSubsystem, 0, false));
+    // new JoystickButton(xbox, Button.kRightBumper.value).whenPressed(new IntakePistonTestCommand(m_intakeSubsystem, 0, true));
+    // new JoystickButton(xbox, Button.kX.value).whenPressed(new IntakePistonTestCommand(m_intakeSubsystem, 1, true));
+    // new JoystickButton(xbox, Button.kB.value).whenPressed(new IntakePistonTestCommand(m_intakeSubsystem, 1, false));
   }
 
   /**

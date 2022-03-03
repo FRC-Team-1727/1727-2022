@@ -13,6 +13,8 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+
 import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -38,6 +40,21 @@ public class IntakeSubsystem extends SubsystemBase {
     for(DoubleSolenoid p : pistons) {
       p.toggle();
     }
+  }
+
+  public void setPiston(int id, Value value) {
+    pistons[id].set(value);
+  }
+
+  public void setPistons(boolean forward) {
+    Value value;
+    if(forward) {
+      value = kForward;
+    } else {
+      value = kReverse;
+    }
+    setPiston(0, value);
+    setPiston(1, value);
   }
 
   @Override
