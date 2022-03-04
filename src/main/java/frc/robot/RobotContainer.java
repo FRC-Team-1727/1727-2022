@@ -37,7 +37,6 @@ import frc.robot.commands.*;
 
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   private final VisionSubsystem m_visionSubsystem = new VisionSubsystem();
@@ -76,18 +75,15 @@ public class RobotContainer {
     new JoystickButton(xbox, Button.kLeftBumper.value).whileHeld(new AimCommand(m_driveSubsystem, m_visionSubsystem, m_shooterSubsystem));
     // new JoystickButton(xbox, Button.kLeftBumper.value).whenReleased(new AimToggleCommand(m_driveSubsystem, false));
 
-    //flywheel test speeds
+    //flywheel manual control
     new JoystickButton(xbox, Button.kStart.value).whenPressed(new ShooterSpeedCommand(m_shooterSubsystem, 2900));
     new JoystickButton(xbox, Button.kBack.value).whenPressed(new ShooterSpeedCommand(m_shooterSubsystem, 0));
-    // new JoystickButton(xbox, Button.kA.value).whenPressed(new ClimbMoveCommand(m_climbSubsystem, -1));
-    // new JoystickButton(xbox, Button.kA.value).whenPressed(new ClimbMoveCommand(m_climbSubsystem, 1));
 
-    //individual intake piston testing
-    // new JoystickButton(xbox, Button.kY.value).whenPressed(new IntakePistonTestCommand(m_intakeSubsystem, 0, true));
-    // new JoystickButton(xbox, Button.kA.value).whenPressed(new IntakePistonTestCommand(m_intakeSubsystem, 0, false));
-    // new JoystickButton(xbox, Button.kRightBumper.value).whenPressed(new IntakePistonTestCommand(m_intakeSubsystem, 0, true));
-    // new JoystickButton(xbox, Button.kX.value).whenPressed(new IntakePistonTestCommand(m_intakeSubsystem, 1, true));
-    // new JoystickButton(xbox, Button.kB.value).whenPressed(new IntakePistonTestCommand(m_intakeSubsystem, 1, false));
+    //climb
+    new JoystickButton(xbox, Button.kX.value).whenPressed(new ClimbIndividualCommand(m_climbSubsystem, 0, 1));
+    new JoystickButton(xbox, Button.kA.value).whenPressed(new ClimbIndividualCommand(m_climbSubsystem, 0, 0));
+    new JoystickButton(xbox, Button.kY.value).whenPressed(new ClimbIndividualCommand(m_climbSubsystem, 1, 1));
+    new JoystickButton(xbox, Button.kB.value).whenPressed(new ClimbIndividualCommand(m_climbSubsystem, 1, 0));
   }
 
   /**

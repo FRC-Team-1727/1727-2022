@@ -28,6 +28,13 @@ public class ClimbSubsystem extends SubsystemBase {
     motors[1].set(ControlMode.PercentOutput, -speed*kClimbSpeed);
   }
 
+  public void move(int id, double speed) {
+    if(id == 1) {
+      speed *= -1;
+    }
+    motors[id].set(ControlMode.PercentOutput, speed * kClimbSpeed);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
