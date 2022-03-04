@@ -45,7 +45,7 @@ public class RobotContainer {
   private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
   private final UptakeSubsystem m_uptakeSubsystem = new UptakeSubsystem();
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private final AutoCommand m_autoCommand = new AutoCommand(m_driveSubsystem, m_shooterSubsystem, m_uptakeSubsystem);
 
   XboxController xbox = new XboxController(kXboxPort);
 

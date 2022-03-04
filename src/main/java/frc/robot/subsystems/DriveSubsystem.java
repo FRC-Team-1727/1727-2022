@@ -70,7 +70,7 @@ public class DriveSubsystem extends SubsystemBase {
         }
     }
 
-    private void setDrive(double left, double right) {
+    public void setDrive(double left, double right) {
         setLDrive(left);
         setRDrive(right);
     }
