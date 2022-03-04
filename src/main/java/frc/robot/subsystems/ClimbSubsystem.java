@@ -24,12 +24,12 @@ public class ClimbSubsystem extends SubsystemBase {
   }
 
   public void move(double speed) {
-    motors[0].set(ControlMode.PercentOutput, speed*kClimbSpeed);
-    motors[1].set(ControlMode.PercentOutput, -speed*kClimbSpeed);
+    motors[0].set(ControlMode.PercentOutput, -speed*kClimbSpeed);
+    motors[1].set(ControlMode.PercentOutput, speed*kClimbSpeed);
   }
 
   public void move(int id, double speed) {
-    if(id == 1) {
+    if(id == 0) {
       speed *= -1;
     }
     motors[id].set(ControlMode.PercentOutput, speed * kClimbSpeed);
