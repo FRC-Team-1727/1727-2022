@@ -43,6 +43,7 @@ public class RobotContainer {
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
   private final UptakeSubsystem m_uptakeSubsystem = new UptakeSubsystem();
+  private final CompressorSubsystem m_compressorSubsystem = new CompressorSubsystem();
 
   private final AutoCommand m_autoCommand = new AutoCommand(m_driveSubsystem, m_shooterSubsystem, m_uptakeSubsystem);
 
@@ -59,6 +60,7 @@ public class RobotContainer {
     // m_climbSubsystem.setDefaultCommand(new ClimbCommand(m_climbSubsystem, xbox.getPOV()));
     m_shooterSubsystem.setDefaultCommand(new ShooterCommand(m_shooterSubsystem));
     // m_climbSubsystem.setDefaultCommand(new ClimbMoveCommand(m_climbSubsystem, ()->xbox.getLeftTriggerAxis()));
+    // m_compressorSubsystem.setDefaultCommand(new CompressorCommand(m_compressorSubsystem));
   }
 
   /**
