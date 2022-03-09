@@ -4,29 +4,23 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.UptakeSubsystem;
-import edu.wpi.first.wpilibj.Timer;
+import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class AutoCommand extends CommandBase {
+public class OuttakeCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final DriveSubsystem m_driveSubsystem;
-  private final ShooterSubsystem m_shooterSubsystem;
-  private final UptakeSubsystem m_uptakeSubsystem;
+  private final IntakeSubsystem m_subsystem;
 
   /**
-   * Creates a new AutoCommand.
+   * Creates a new OuttakeCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public AutoCommand(DriveSubsystem drive, ShooterSubsystem shooter, UptakeSubsystem uptake) {
-    m_driveSubsystem = drive;
-    m_shooterSubsystem = shooter;
-    m_uptakeSubsystem = uptake;
+  public OuttakeCommand(IntakeSubsystem subsystem) {
+    m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(subsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -36,20 +30,12 @@ public class AutoCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_shooterSubsystem.setSpeed(2900);
-    Timer.delay(5);
-    m_uptakeSubsystem.move(1);
-    Timer.delay(2);
-    m_driveSubsystem.setDrive(.25, .25);
-    Timer.delay(4);
-    m_driveSubsystem.setDrive(0, 0);
+    m_subsystem.intake(-1);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    m_driveSubsystem.setDrive(0, 0);
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

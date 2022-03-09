@@ -60,7 +60,7 @@ public final class Constants {
         public static final double kVisionHeight = 104 - 23; //reflective tape height = 8'8" or 104"
         public static final double kHubRadius = 34;
 
-        public static final double kP = 0.02;
+        public static final double kP = 0.01;
         public static final double kI = 0;
         public static final double kD = 0;
     }
