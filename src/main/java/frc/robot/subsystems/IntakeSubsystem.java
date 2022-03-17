@@ -33,7 +33,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void intake(double spd) {
-    intake.set(ControlMode.PercentOutput, -spd * 0.8);
+    intake.set(ControlMode.PercentOutput, -spd * kIntakeMultiplier);
   }
 
   public void togglePiston() {

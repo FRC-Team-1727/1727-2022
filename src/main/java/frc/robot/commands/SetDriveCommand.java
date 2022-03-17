@@ -4,31 +4,50 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
 
+import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-/** An example command that uses an example subsystem. */
-public class ShooterIncrementCommand extends CommandBase {
+public class SetDriveCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ShooterSubsystem m_subsystem;
-  private final double speed;
+
+  private final DriveSubsystem m_subsystem;
+
+  private final double left;
+  private final double right;
+
   /**
-   * Creates a new ShooterIncrementCommand.
+   * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ShooterIncrementCommand(ShooterSubsystem subsystem, double speed) {
+  public SetDriveCommand(DriveSubsystem subsystem, double left, double right) {
     m_subsystem = subsystem;
-    this.speed = speed;
+
+    this.left = left;
+    this.right = right;
+    
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
+
+  }
+
+  public SetDriveCommand(DriveSubsystem subsystem, double speed) {
+    m_subsystem = subsystem;
+
+    left = speed;
+    right = speed;
+    
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(subsystem);
+
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_subsystem.increment(speed);
+    m_subsystem.setDrive(left, right);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

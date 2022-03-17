@@ -7,32 +7,45 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import static frc.robot.Constants.ClimbConstants.*;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ClimbSubsystem extends SubsystemBase {
-  private VictorSPX[] motors = new VictorSPX[]{
-      new VictorSPX(kClimbPort[0]),
-      new VictorSPX(kClimbPort[1])
+  private CANSparkMax[] motors = new CANSparkMax[]{
+      new CANSparkMax(kClimbPort[0], MotorType.kBrushless),
+      new CANSparkMax(kClimbPort[1], MotorType.kBrushless)
   };
+
+  //private RelativeEncoder encoder = motors[0].getEncoder();
+  //private SparkMaxPIDController controller = motors[0].getPIDController();
   
   /** Creates a new ClimbSubsystem. */
   public ClimbSubsystem() {
-    for(VictorSPX m : motors) {
-      m.setNeutralMode(NeutralMode.Brake);
+    for (CANSparkMax m : motors) {
+      m.setIdleMode(IdleMode.kBrake);
     }
   }
 
+  public void testMotor(double speed) {
+    motors[0].set(speed);
+  }
+
   public void move(double speed) {
-    motors[0].set(ControlMode.PercentOutput, -speed*kClimbSpeed);
-    motors[1].set(ControlMode.PercentOutput, speed*kClimbSpeed);
+    motors[0].set(-speed*kClimbSpeed);
+    motors[1].set(speed*kClimbSpeed);
   }
 
   public void move(int id, double speed) {
     if(id == 0) {
       speed *= -1;
     }
-    motors[id].set(ControlMode.PercentOutput, speed * kClimbSpeed);
+    motors[id].set(speed * kClimbSpeed);
   }
 
   @Override

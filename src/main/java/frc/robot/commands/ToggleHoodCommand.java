@@ -5,22 +5,22 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.ShooterSubsystem;
-
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import static frc.robot.Constants.ShooterConstants.*;
 
 /** An example command that uses an example subsystem. */
-public class ShooterIncrementCommand extends CommandBase {
+public class ToggleHoodCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final ShooterSubsystem m_subsystem;
-  private final double speed;
+
   /**
-   * Creates a new ShooterIncrementCommand.
+   * Creates a new ToggleHoodCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ShooterIncrementCommand(ShooterSubsystem subsystem, double speed) {
+  public ToggleHoodCommand(ShooterSubsystem subsystem) {
     m_subsystem = subsystem;
-    this.speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -28,7 +28,13 @@ public class ShooterIncrementCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_subsystem.increment(speed);
+    if(m_subsystem.getHoodValue() == Value.kForward) {
+      m_subsystem.setHood(false);
+      m_subsystem.setSpeed(kCloseSpeed);
+    } else {
+      m_subsystem.setHood(true);
+      m_subsystem.setSpeed(kFarSpeed);
+    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.

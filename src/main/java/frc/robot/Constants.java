@@ -29,10 +29,11 @@ public final class Constants {
             {2,3},
             {6,7}
         };
+        public static final double kIntakeMultiplier = 0.8d;
     }
 
     public static final class UptakeConstants {
-        public static final int kUptakePort = 5;
+        public static final int[] kUptakePort = new int[] {5, 2};
     }
 
     public static final class XboxConstants {
@@ -53,6 +54,8 @@ public final class Constants {
         public static final double kHoodChangeThreshold = 0;
 
         public static final double kDefaultSpeed = 0;
+        public static final double kFarSpeed = 2900;
+        public static final double kCloseSpeed = 2900;
     }
 
     public static final class AimConstants {
@@ -66,7 +69,7 @@ public final class Constants {
     }
 
     public static final class ClimbConstants {
-        public static final int[] kClimbPort = new int[] {2,1};
+        public static final int[] kClimbPort = new int[] {50,51};
         public static final double kClimbSpeed =  1;
     }
 

@@ -15,6 +15,8 @@ import static frc.robot.Constants.ShooterConstants.*;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+
 import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -49,6 +51,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void move() {
     controller.setReference(curSpeed, ControlType.kVelocity);
+    System.out.println(curSpeed);
   }
 
   public void setSpeed(double spd) {
@@ -84,6 +87,18 @@ public class ShooterSubsystem extends SubsystemBase {
   public void increment(double speed) {
     curSpeed += speed;
     controller.setReference(curSpeed, ControlType.kVelocity);
+  }
+
+  public void setHood(boolean value) {
+    if(value) {
+      hoodPiston.set(kForward);
+    } else {
+      hoodPiston.set(kReverse);
+    }
+  }
+
+  public Value getHoodValue() {
+    return hoodPiston.get();
   }
 
   @Override

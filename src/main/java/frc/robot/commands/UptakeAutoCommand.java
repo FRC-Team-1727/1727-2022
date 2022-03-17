@@ -4,21 +4,23 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.UptakeSubsystem;
+
+import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class ShooterIncrementCommand extends CommandBase {
+public class UptakeAutoCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ShooterSubsystem m_subsystem;
-  private final double speed;
+  private final UptakeSubsystem m_subsystem;
+  private double speed;
   /**
-   * Creates a new ShooterIncrementCommand.
+   * Creates a new UptakeCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ShooterIncrementCommand(ShooterSubsystem subsystem, double speed) {
+  public UptakeAutoCommand(UptakeSubsystem subsystem, double speed) {
     m_subsystem = subsystem;
     this.speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -28,7 +30,7 @@ public class ShooterIncrementCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_subsystem.increment(speed);
+    m_subsystem.move(speed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

@@ -59,14 +59,14 @@ public class DriveSubsystem extends SubsystemBase {
     private void setLDrive(double spd) {
         //move lDrive
         for (CANSparkMax m : lDrive) {
-            m.set(-spd);
+            m.set(spd);
         }
     }
 
     private void setRDrive(double spd) {
         //move rDrive
         for (CANSparkMax m : rDrive) {
-            m.set(spd);
+            m.set(-spd);
         }
     }
 
@@ -82,6 +82,6 @@ public class DriveSubsystem extends SubsystemBase {
             double spd = pid.calculate(angle); //use pid.setSetpoint?
             setDrive(spd, -spd);
         }
-        setDrive(-angle * kP, angle * kP);
+        setDrive(angle * kP, -angle * kP);
     }
 }

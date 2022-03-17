@@ -12,13 +12,18 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class UptakeSubsystem extends SubsystemBase {
-  private VictorSPX motor = new VictorSPX(kUptakePort);
+  private VictorSPX[] motor = new VictorSPX[] {
+    new VictorSPX(kUptakePort[0]),
+    new VictorSPX(kUptakePort[1])
+  };
   
   /** Creates a new UptakeSubsystem. */
   public UptakeSubsystem() {}
 
   public void move(double speed) {
-    motor.set(ControlMode.PercentOutput, speed);
+    for (VictorSPX m : motor) {
+      m.set(ControlMode.PercentOutput, speed * 0.5);
+    }
   }
 
   @Override
