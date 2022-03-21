@@ -70,7 +70,13 @@ public final class Constants {
 
     public static final class ClimbConstants {
         public static final int[] kClimbPort = new int[] {50,51};
-        public static final double kClimbSpeed =  1;
+        public static final double kClimbSpeed =  0.1; //set the right speed (this is in rotations per tick)
+        public static final float kClimbMax = 10; //change to rotation value when climb is at full height
+
+        public static final double kP = 0.001;
+        public static final double kI = 0.000002;
+        public static final double kD = 0;
+        public static final double kF = 0;
     }
 
 }

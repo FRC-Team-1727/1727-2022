@@ -10,16 +10,25 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import static frc.robot.Constants.ClimbConstants.*;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ClimbSubsystem extends SubsystemBase {
+  private float position;
+
   private CANSparkMax[] motors = new CANSparkMax[]{
       new CANSparkMax(kClimbPort[0], MotorType.kBrushless),
       new CANSparkMax(kClimbPort[1], MotorType.kBrushless)
+  };
+
+  private SparkMaxPIDController[] controllers = new SparkMaxPIDController[]{
+      motors[0].getPIDController(),
+      motors[1].getPIDController()
   };
 
   //private RelativeEncoder encoder = motors[0].getEncoder();
@@ -30,6 +39,20 @@ public class ClimbSubsystem extends SubsystemBase {
     for (CANSparkMax m : motors) {
       m.setIdleMode(IdleMode.kBrake);
     }
+    controllers[0].setFeedbackDevice(motors[0].getEncoder());
+    controllers[1].setFeedbackDevice(motors[1].getEncoder());
+    position = 0;
+    updateConstants();
+  }
+
+  private void updateConstants() {
+    for (SparkMaxPIDController controller : controllers) {
+      controller.setOutputRange(0, 1);
+      controller.setP(kP);
+      controller.setI(kI);
+      controller.setD(kD);
+      controller.setFF(kF);
+    }
   }
 
   public void testMotor(double speed) {
@@ -37,8 +60,20 @@ public class ClimbSubsystem extends SubsystemBase {
   }
 
   public void move(double speed) {
-    motors[0].set(-speed*kClimbSpeed);
-    motors[1].set(speed*kClimbSpeed);
+    for(CANSparkMax m : motors) {
+      m.set(speed);
+    }
+  }
+
+  public void climb(double speed) {
+    position += speed * kClimbSpeed;
+    if(position < 0) {
+      position = 0;
+    } else if(position > kClimbMax) {
+      position = kClimbMax;
+    }
+    controllers[0].setReference(position, ControlType.kPosition);
+    controllers[1].setReference(-position, ControlType.kPosition);
   }
 
   public void move(int id, double speed) {
@@ -47,7 +82,7 @@ public class ClimbSubsystem extends SubsystemBase {
     }
     motors[id].set(speed * kClimbSpeed);
   }
-
+ 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
