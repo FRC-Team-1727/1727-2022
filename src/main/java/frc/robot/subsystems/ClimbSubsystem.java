@@ -4,35 +4,61 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.CANSparkMax.ControlType;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import static frc.robot.Constants.ClimbConstants.*;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ClimbSubsystem extends SubsystemBase {
-  private VictorSPX[] motors = new VictorSPX[]{
-      new VictorSPX(kClimbPort[0]),
-      new VictorSPX(kClimbPort[1])
+  private float position;
+
+  private CANSparkMax[] motors = new CANSparkMax[]{
+      new CANSparkMax(kClimbPort[0], MotorType.kBrushless),
+      new CANSparkMax(kClimbPort[1], MotorType.kBrushless)
+  };
+
+  private SparkMaxPIDController[] controllers = new SparkMaxPIDController[]{
+      motors[0].getPIDController(),
+      motors[1].getPIDController()
   };
   
   /** Creates a new ClimbSubsystem. */
   public ClimbSubsystem() {
-    for(VictorSPX m : motors) {
-      m.setNeutralMode(NeutralMode.Brake);
+    for(CANSparkMax m : motors) {
+      m.setIdleMode(IdleMode.kBrake);
     }
+    controllers[0].setFeedbackDevice(motors[0].getEncoder());
+    controllers[1].setFeedbackDevice(motors[1].getEncoder());
+    position = 0;
   }
 
   public void move(double speed) {
-    motors[0].set(ControlMode.PercentOutput, -speed*kClimbSpeed);
-    motors[1].set(ControlMode.PercentOutput, speed*kClimbSpeed);
+    for(CANSparkMax m : motors) {
+      m.set(speed);
+    }
+  }
+
+  public void climb(double speed) {
+    position += speed * kClimbSpeed;
+    if(position < 0) {
+      position = 0;
+    } else if(position > kClimbMax) {
+      position = kClimbMax;
+    }
+    controllers[0].setReference(position, ControlType.kPosition);
+    controllers[1].setReference(-position, ControlType.kPosition);
   }
 
   public void move(int id, double speed) {
     if(id == 0) {
       speed *= -1;
     }
-    motors[id].set(ControlMode.PercentOutput, speed * kClimbSpeed);
+    motors[id].set(speed);
   }
 
   @Override
