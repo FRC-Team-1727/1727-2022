@@ -38,7 +38,7 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void execute() {
     if (spdTwo.getAsDouble() > 0.2) m_subsystem.intake(-spdTwo.getAsDouble());
-    m_subsystem.intake(spd.getAsDouble());
+    else m_subsystem.intake(spd.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.
