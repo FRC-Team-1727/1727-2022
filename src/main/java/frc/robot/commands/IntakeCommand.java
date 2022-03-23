@@ -15,17 +15,19 @@ public class IntakeCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final IntakeSubsystem m_subsystem;
   private DoubleSupplier spd;
+  private DoubleSupplier spdTwo;
   /**
    * Creates a new IntakeCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public IntakeCommand(IntakeSubsystem subsystem, DoubleSupplier spd, DoubleSupplier spd2) {
+  public IntakeCommand(IntakeSubsystem subsystem, DoubleSupplier spd, DoubleSupplier spdTwo) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
 
     this.spd = spd;
+    this.spdTwo = spdTwo;
   }
 
   // Called when the command is initially scheduled.
@@ -35,6 +37,7 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if (spdTwo.getAsDouble() > 0.2) m_subsystem.intake(-spdTwo.getAsDouble());
     m_subsystem.intake(spd.getAsDouble());
   }
 
