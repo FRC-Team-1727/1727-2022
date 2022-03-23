@@ -15,15 +15,16 @@ public class UptakeCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final UptakeSubsystem m_subsystem;
   private DoubleSupplier speed;
+  private DoubleSupplier speedTwo;
   /**
    * Creates a new UptakeCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public UptakeCommand(UptakeSubsystem subsystem, DoubleSupplier speed) {
+  public UptakeCommand(UptakeSubsystem subsystem, DoubleSupplier speed, DoubleSupplier speedTwo) {
     m_subsystem = subsystem;
     this.speed = speed;
-
+    this.speedTwo = speedTwo;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -37,11 +38,13 @@ public class UptakeCommand extends CommandBase {
   public void execute() {
 
     //look over this: (if approved, delete this comment)
-    if(speed.getAsDouble() < 0.3){
+    if (speed.getAsDouble() < 0.2 && speedTwo.getAsDouble() < 0.2) {
       m_subsystem.grayWheelSetSpeed(-0.25);
       m_subsystem.greenWheelSetSpeed(0);
-    }else{
+    } else if (speed.getAsDouble() >= 0.2) {
       m_subsystem.move(speed.getAsDouble());
+    } else if (speedTwo.getAsDouble() >= 0.2) {
+      m_subsystem.move(-speedTwo.getAsDouble());
     }
     
   }
