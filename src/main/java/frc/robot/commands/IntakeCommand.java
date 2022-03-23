@@ -20,7 +20,7 @@ public class IntakeCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public IntakeCommand(IntakeSubsystem subsystem, DoubleSupplier spd) {
+  public IntakeCommand(IntakeSubsystem subsystem, DoubleSupplier spd, DoubleSupplier spd2) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);

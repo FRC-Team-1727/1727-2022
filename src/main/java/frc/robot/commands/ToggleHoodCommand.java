@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.UptakeSubsystem;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import static frc.robot.Constants.ShooterConstants.*;
@@ -13,16 +14,19 @@ import static frc.robot.Constants.ShooterConstants.*;
 public class ToggleHoodCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final ShooterSubsystem m_subsystem;
+  private final UptakeSubsystem m_uptake;
 
   /**
    * Creates a new ToggleHoodCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ToggleHoodCommand(ShooterSubsystem subsystem) {
+  public ToggleHoodCommand(ShooterSubsystem subsystem, UptakeSubsystem uptake) {
     m_subsystem = subsystem;
+    m_uptake = uptake;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
+    addRequirements(uptake);
   }
 
   // Called when the command is initially scheduled.
@@ -35,11 +39,14 @@ public class ToggleHoodCommand extends CommandBase {
       m_subsystem.setHood(true);
       m_subsystem.setSpeed(kFarSpeed);
     }
+    m_uptake.grayWheelSetSpeed(-0.1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    m_uptake.grayWheelSetSpeed(-0.1);
+  }
 
   // Called once the command ends or is interrupted.
   @Override

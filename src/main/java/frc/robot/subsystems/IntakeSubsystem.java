@@ -36,6 +36,10 @@ public class IntakeSubsystem extends SubsystemBase {
     intake.set(ControlMode.PercentOutput, -spd * kIntakeMultiplier);
   }
 
+  public void outake(double spd) {
+    intake.set(ControlMode.PercentOutput, spd * kIntakeMultiplier);
+  }
+
   public void togglePiston() {
     for(DoubleSolenoid p : pistons) {
       p.toggle();

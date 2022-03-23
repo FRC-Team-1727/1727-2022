@@ -22,8 +22,16 @@ public class UptakeSubsystem extends SubsystemBase {
 
   public void move(double speed) {
     for (VictorSPX m : motor) {
-      m.set(ControlMode.PercentOutput, speed * 0.5);
+      m.set(ControlMode.PercentOutput, speed * 0.4);
     }
+  }
+
+  public void grayWheelSetSpeed(double speed) {
+    motor[0].set(ControlMode.PercentOutput, speed);
+  }
+
+  public void greenWheelSetSpeed(double speed) {
+    motor[1].set(ControlMode.PercentOutput, speed);
   }
 
   @Override

@@ -47,7 +47,8 @@ public class RobotContainer {
 
   private final AutoCommand m_autoCommand = new AutoCommand(m_driveSubsystem, m_shooterSubsystem, m_uptakeSubsystem);
 
-  XboxController xbox = new XboxController(kXboxPort);
+  XboxController xbox = new XboxController(kXboxPort[0]);
+  XboxController xboxTwo = new XboxController(kXboxPort[1]);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -55,10 +56,11 @@ public class RobotContainer {
     configureButtonBindings();//penis envy
     // default commands hehehehaw
     m_driveSubsystem.setDefaultCommand(new DriveCommand(m_driveSubsystem,()->xbox.getLeftX(), ()->-xbox.getRightY()));
-    m_intakeSubsystem.setDefaultCommand(new IntakeCommand(m_intakeSubsystem,()->xbox.getRightTriggerAxis()));
+    m_intakeSubsystem.setDefaultCommand(new IntakeCommand(m_intakeSubsystem,()->xbox.getRightTriggerAxis(), () -> xboxTwo.getRightTriggerAxis()));
     m_uptakeSubsystem.setDefaultCommand(new UptakeCommand(m_uptakeSubsystem, ()->xbox.getLeftTriggerAxis()));
     // m_climbSubsystem.setDefaultCommand(new ClimbCommand(m_climbSubsystem, xbox.getPOV()));
     m_shooterSubsystem.setDefaultCommand(new ShooterCommand(m_shooterSubsystem));
+    //m_climbSubsystem.setDefaultCommand(new ClimbMoveCommand(m_climbSubsystem, () -> xboxTwo.getLeftY(), () -> xboxTwo.getRightY()));
     // m_climbSubsystem.setDefaultCommand(new ClimbMoveCommand(m_climbSubsystem, ()->xbox.getLeftTriggerAxis()));
     // m_compressorSubsystem.setDefaultCommand(new CompressorCommand(m_compressorSubsystem));
   }
@@ -70,6 +72,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    System.out.println("FIOEJFOE SJFOI ESJFIOJFOEFJ IOSJ FOIJSIOFKSOFH UESHF IUSKF");
     new JoystickButton(xbox, Button.kRightBumper.value).whenPressed(new IntakePistonCommand(m_intakeSubsystem));
     //new JoystickButton(xbox, Button.kB.value).whenHeld(new OuttakeCommand(m_intakeSubsystem));
 
@@ -79,7 +82,8 @@ public class RobotContainer {
     // new JoystickButton(xbox, Button.kLeftBumper.value).whenReleased(new AimToggleCommand(m_driveSubsystem, false));
 
     //flywheel manual control 
-    new JoystickButton(xbox, Button.kStart.value).whenPressed(new ToggleHoodCommand(m_shooterSubsystem));
+    new JoystickButton(xbox, Button.kStart.value).whenPressed(new ToggleHoodCommand(m_shooterSubsystem, m_uptakeSubsystem));
+    new JoystickButton(xboxTwo, Button.kStart.value).whenPressed(new ToggleHoodCommand(m_shooterSubsystem, m_uptakeSubsystem));
     new JoystickButton(xbox, Button.kBack.value).whenPressed(new ShooterSpeedCommand(m_shooterSubsystem, 0));
     //new JoystickButton(xbox, Button.kB.value).whenPressed(new ShooterIncrementCommand(m_shooterSubsystem, 50));
     //new JoystickButton(xbox, Button.kA.value).whenPressed(new ShooterIncrementCommand(m_shooterSubsystem, -50));
@@ -89,15 +93,13 @@ public class RobotContainer {
     // new JoystickButton(xbox, Button.kA.value).whenPressed(new ClimbIndividualCommand(m_climbSubsystem, 0, 0));
     // new JoystickButton(xbox, Button.kY.value).whenPressed(new ClimbIndividualCommand(m_climbSubsystem, 1, 1));
     // new JoystickButton(xbox, Button.kB.value).whenPressed(new ClimbIndividualCommand(m_climbSubsystem, 1, 0));
-    new JoystickButton(xbox, Button.kY.value).whenHeld(new ClimbMoveCommand(m_climbSubsystem, 1));
-    new JoystickButton(xbox, Button.kB.value).whenHeld(new ClimbMoveCommand(m_climbSubsystem, -1));
+    new JoystickButton(xboxTwo, Button.kY.value).whenHeld(new ClimbMoveCommand(m_climbSubsystem, 1));
+    new JoystickButton(xboxTwo, Button.kB.value).whenHeld(new ClimbMoveCommand(m_climbSubsystem, -1));
 
-    new JoystickButton(xbox, Button.kA.value).whenHeld(new TestMotorFiftyCommand(m_climbSubsystem, 1));
-
-    //new JoystickButton(xbox, Button.kX.value).whenHeld(new ClimbIndividualCommand(m_climbSubsystem, 0, 1));
-    //new JoystickButton(xbox, Button.kA.value).whenHeld(new ClimbIndividualCommand(m_climbSubsystem, 0, -1));
-    //new JoystickButton(xbox, Button.kY.value).whenHeld(new ClimbIndividualCommand(m_climbSubsystem, 1, 1));
-    //new JoystickButton(xbox, Button.kB.value).whenHeld(new ClimbIndividualCommand(m_climbSubsystem, 1, -1));
+    //new JoystickButton(xbox, Button.kA.value).whenHeld(new ClimbIndividualCommand(m_climbSubsystem, 0, 1));
+    //new JoystickButton(xbox, Button.kX.value).whenHeld(new ClimbIndividualCommand(m_climbSubsystem, 0, -1));
+    //new JoystickButton(xbox, Button.kY.value).whenHeld(new ClimbIndividualCommand(m_climbSubsystem, 1, -1));
+    //new JoystickButton(xbox, Button.kB.value).whenHeld(new ClimbIndividualCommand(m_climbSubsystem, 1, 1));
   }
 
   /**

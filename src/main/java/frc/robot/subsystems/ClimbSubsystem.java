@@ -16,10 +16,14 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import static frc.robot.Constants.ClimbConstants.*;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ClimbSubsystem extends SubsystemBase {
   private float position;
+
+  private DigitalInput leftLimit = new DigitalInput(kLimitPort[0]);
+  private DigitalInput rightLimit = new DigitalInput(kLimitPort[1]);
 
   private CANSparkMax[] motors = new CANSparkMax[]{
       new CANSparkMax(kClimbPort[0], MotorType.kBrushless),
@@ -42,7 +46,7 @@ public class ClimbSubsystem extends SubsystemBase {
     controllers[0].setFeedbackDevice(motors[0].getEncoder());
     controllers[1].setFeedbackDevice(motors[1].getEncoder());
     position = 0;
-    updateConstants();
+    //updateConstants();
   }
 
   private void updateConstants() {
@@ -60,11 +64,39 @@ public class ClimbSubsystem extends SubsystemBase {
   }
 
   public void move(double speed) {
-    for(CANSparkMax m : motors) {
-      m.set(speed);
+    // for(CANSparkMax m : motors) {
+    //   m.set(speed);
+    // }
+    //look over this: (if approved, delete this comment)
+    //notes: be sure to enter ports for limit switches in constants
+    if(speed < 0){
+      if(!leftLimit.get()){
+        motors[0].set(0);
+        System.out.println("LEFT Limit switch pressed");
+    
+      }else{
+        motors[0].set(speed);
+      }
+
+      if(!rightLimit.get()){
+        motors[1].set(0);
+        System.out.println("RIGHT Limit switch pressed");
+      }else{
+        motors[1].set(-speed);
+        //idk which motor is which index, and idk if positive speed is up or down, so check it over
+        //also the overloaded methods of move() set different motors to be negative
+      }
+      
+    }else{
+      motors[0].set(speed);
+      motors[1].set(-speed);
     }
+    
+    // motors[0].set(speed);
+    // motors[1].set(-speed);
   }
 
+  //PID version of move()
   public void climb(double speed) {
     position += speed * kClimbSpeed;
     if(position < 0) {

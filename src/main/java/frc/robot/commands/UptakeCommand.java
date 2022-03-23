@@ -23,6 +23,7 @@ public class UptakeCommand extends CommandBase {
   public UptakeCommand(UptakeSubsystem subsystem, DoubleSupplier speed) {
     m_subsystem = subsystem;
     this.speed = speed;
+
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -34,12 +35,25 @@ public class UptakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.move(speed.getAsDouble());
+
+    //look over this: (if approved, delete this comment)
+    if(speed.getAsDouble() < 0.3){
+      m_subsystem.grayWheelSetSpeed(-0.25);
+      m_subsystem.greenWheelSetSpeed(0);
+    }else{
+      m_subsystem.move(speed.getAsDouble());
+    }
+    
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    if (speed.getAsDouble() < 0.3f) {
+      m_subsystem.grayWheelSetSpeed(-0.25);
+      m_subsystem.greenWheelSetSpeed(0);
+    }
+  }
 
   // Returns true when the command should end.
   @Override
