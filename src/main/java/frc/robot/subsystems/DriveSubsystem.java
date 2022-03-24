@@ -30,6 +30,8 @@ public class DriveSubsystem extends SubsystemBase {
     public DriveSubsystem() {
         // lEncoder.setDistancePerPulse(kWheelDiameter * Math.PI / 256);
         // rEncoder.setDistancePerPulse(kWheelDiameter * Math.PI / 256);
+        for(CANSparkMax m : lDrive) m.getEncoder().setPositionConversionFactor(42);
+        for(CANSparkMax m : rDrive) m.getEncoder().setPositionConversionFactor(42);
     }
 
     @Override
@@ -75,6 +77,10 @@ public class DriveSubsystem extends SubsystemBase {
         setRDrive(right);
     }
 
+    public void setDrive(double speed) {
+        setDrive(speed, speed);
+    }
+
     //vision aiming
 
     public void aim(double angle) {
@@ -83,5 +89,17 @@ public class DriveSubsystem extends SubsystemBase {
             setDrive(spd, -spd);
         }
         setDrive(angle * kP, -angle * kP);
+    }
+
+    public double getEncoderAverage() {
+        double total = 0;
+        for(CANSparkMax m : lDrive) total += m.getEncoder().getPosition();
+        for(CANSparkMax m : rDrive) total -= m.getEncoder().getPosition();
+        return total / 4;
+    }
+
+    public void resetEncoders() {
+        for(CANSparkMax m : lDrive) m.getEncoder().setPosition(0);
+        for(CANSparkMax m : rDrive) m.getEncoder().setPosition(0);
     }
 }

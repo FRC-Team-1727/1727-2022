@@ -16,6 +16,7 @@ public class UptakeCommand extends CommandBase {
   private final UptakeSubsystem m_subsystem;
   private DoubleSupplier speed;
   private DoubleSupplier speedTwo;
+  private int counter;
   /**
    * Creates a new UptakeCommand.
    *
@@ -25,6 +26,7 @@ public class UptakeCommand extends CommandBase {
     m_subsystem = subsystem;
     this.speed = speed;
     this.speedTwo = speedTwo;
+    this.counter = 0;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -38,22 +40,28 @@ public class UptakeCommand extends CommandBase {
   public void execute() {
 
     //look over this: (if approved, delete this comment)
-    if (speed.getAsDouble() < 0.2 && speedTwo.getAsDouble() < 0.2) {
-      m_subsystem.grayWheelSetSpeed(-0.25);
-      m_subsystem.greenWheelSetSpeed(0);
-    } else if (speed.getAsDouble() >= 0.2) {
-      m_subsystem.move(speed.getAsDouble());
-    } else if (speedTwo.getAsDouble() >= 0.2) {
-      m_subsystem.move(-speedTwo.getAsDouble());
-    }
+      if (speed.getAsDouble() < 0.1 && speedTwo.getAsDouble() < 0.1) {
+        m_subsystem.grayWheelSetSpeed(-0.30);
+        m_subsystem.greenWheelSetSpeed(0);
+      } else if (speed.getAsDouble() >= 0.1) {
+        counter++;
+        if (counter < 40) m_subsystem.move(speed.getAsDouble());
+        else if (counter < 60) m_subsystem.move(0);
+        else counter = 0;
+      } else if (speedTwo.getAsDouble() >= 0.1) {
+        counter++;
+        if (counter < 40) m_subsystem.move(-speedTwo.getAsDouble());         
+        else if (counter < 60) m_subsystem.move(0);
+        else counter = 0;
+      } else counter = 0;
     
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    if (speed.getAsDouble() < 0.3f) {
-      m_subsystem.grayWheelSetSpeed(-0.25);
+    if (speed.getAsDouble() < 0.1f) {
+      m_subsystem.grayWheelSetSpeed(-0.30);
       m_subsystem.greenWheelSetSpeed(0);
     }
   }

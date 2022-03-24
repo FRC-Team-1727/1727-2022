@@ -55,7 +55,7 @@ public final class Constants {
 
         public static final double kDefaultSpeed = 0;
         public static final double kFarSpeed = 2900;
-        public static final double kCloseSpeed = 2900;
+        public static final double kCloseSpeed = 2850;
     }
 
     public static final class AimConstants {

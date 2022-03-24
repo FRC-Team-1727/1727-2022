@@ -14,6 +14,7 @@ import static frc.robot.Constants.XboxConstants.*;
 
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
+import frc.robot.commands.auton.AutoCommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -85,8 +86,8 @@ public class RobotContainer {
     new JoystickButton(xbox, Button.kStart.value).whenPressed(new ToggleHoodCommand(m_shooterSubsystem, m_uptakeSubsystem));
     new JoystickButton(xboxTwo, Button.kStart.value).whenPressed(new ToggleHoodCommand(m_shooterSubsystem, m_uptakeSubsystem));
     new JoystickButton(xbox, Button.kBack.value).whenPressed(new ShooterSpeedCommand(m_shooterSubsystem, 0));
-    //new JoystickButton(xbox, Button.kB.value).whenPressed(new ShooterIncrementCommand(m_shooterSubsystem, 50));
-    //new JoystickButton(xbox, Button.kA.value).whenPressed(new ShooterIncrementCommand(m_shooterSubsystem, -50));
+    new JoystickButton(xbox, Button.kB.value).whenPressed(new ShooterIncrementCommand(m_shooterSubsystem, 25));
+    new JoystickButton(xbox, Button.kA.value).whenPressed(new ShooterIncrementCommand(m_shooterSubsystem, -25));
 
     //climb
     // new JoystickButton(xbox, Button.kX.value).whenPressed(new ClimbIndividualCommand(m_climbSubsystem, 0, 1));

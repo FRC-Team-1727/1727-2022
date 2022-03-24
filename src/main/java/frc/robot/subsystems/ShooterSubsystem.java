@@ -51,7 +51,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void move() {
     controller.setReference(curSpeed, ControlType.kVelocity);
-    System.out.println(curSpeed);
+    // System.out.println(curSpeed);
   }
 
   public void setSpeed(double spd) {
@@ -91,9 +91,15 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void setHood(boolean value) {
     if(value) {
-      hoodPiston.set(kForward);
-    } else {
       hoodPiston.set(kReverse);
+      setSpeed(kFarSpeed);
+      System.out.println("Hood is FARRRRRRRRRRRRRRRR");
+      System.out.println(curSpeed);
+    } else {
+      hoodPiston.set(kForward);
+      setSpeed(kCloseSpeed);
+      System.out.println("Hood is CLOSE");
+      System.out.println(curSpeed);
     }
   }
 

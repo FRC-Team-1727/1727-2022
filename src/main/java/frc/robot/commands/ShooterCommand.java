@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /** An example command that uses an example subsystem. */
 public class ShooterCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ShooterSubsystem m_subsystem;
+  private final ShooterSubsystem m_subsystem; 
   /**
    * Creates a new ShooterCommand.
    *
@@ -21,6 +21,7 @@ public class ShooterCommand extends CommandBase {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
+
   }
 
   // Called when the command is initially scheduled.

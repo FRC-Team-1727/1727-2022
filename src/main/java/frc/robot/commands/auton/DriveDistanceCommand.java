@@ -2,52 +2,43 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.auton;
 
-import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.UptakeSubsystem;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import static frc.robot.Constants.ShooterConstants.*;
 
 /** An example command that uses an example subsystem. */
-public class ToggleHoodCommand extends CommandBase {
+public class DriveDistanceCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ShooterSubsystem m_subsystem;
-  private final UptakeSubsystem m_uptake;
+  private final DriveSubsystem m_subsystem;
+  private double distance;
+  private double speed;
 
   /**
-   * Creates a new ToggleHoodCommand.
+   * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ToggleHoodCommand(ShooterSubsystem subsystem, UptakeSubsystem uptake) {
+  public DriveDistanceCommand(DriveSubsystem subsystem, double distance, double speed) {
     m_subsystem = subsystem;
-    m_uptake = uptake;
+    this.distance = distance;
+    this.speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
-    addRequirements(uptake);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if(m_subsystem.getHoodValue() == Value.kReverse) {
-      m_subsystem.setHood(false);
-      // m_subsystem.setSpeed(kCloseSpeed);
-      
-    } else {
-      m_subsystem.setHood(true);
-      // m_subsystem.setSpeed(kFarSpeed);
-      
-    }
-    m_uptake.grayWheelSetSpeed(-0.1);
+    m_subsystem.resetEncoders();
+    System.out.println("starting drive");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_uptake.grayWheelSetSpeed(-0.1);
+    m_subsystem.setDrive(speed);
+    System.out.println(m_subsystem.getEncoderAverage() + " " + distance);
   }
 
   // Called once the command ends or is interrupted.
@@ -57,6 +48,6 @@ public class ToggleHoodCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return Math.abs(m_subsystem.getEncoderAverage()) > distance;
   }
 }
