@@ -20,7 +20,8 @@ public final class Constants {
 
         public static final double kThreshold = 0.2;
 
-        public static final double kWheelDiameter = 6; //replace this with empirical wheel diameter after finding it
+        public static final double kTurningRadius = 11;
+        public static final double kEncoderConversion = 40/22.86;
     }
 
     public static final class IntakeConstants {
@@ -48,7 +49,7 @@ public final class Constants {
 
         public static final double kP = 0.0008;
         public static final double kI = 0.000002;
-        public static final double kD = 2;
+        public static final double kD = 2.25; //2
         public static final double kF = 0;
 
         public static final double kHoodChangeThreshold = 0;

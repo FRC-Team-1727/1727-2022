@@ -15,7 +15,7 @@ public class DriveDistanceCommand extends CommandBase {
   private double speed;
 
   /**
-   * Creates a new ExampleCommand.
+   * Creates a new DriveDistanceCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
@@ -37,17 +37,20 @@ public class DriveDistanceCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.setDrive(speed);
-    System.out.println(m_subsystem.getEncoderAverage() + " " + distance);
+    m_subsystem.setDrive(speed * distance/Math.abs(distance));
+    // System.out.println(m_subsystem.getEncoderAverage() + " " + distance);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    // m_subsystem.setDrive(0);
+    System.out.println("done!");
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(m_subsystem.getEncoderAverage()) > distance;
+    return Math.abs(m_subsystem.getEncoderAverage()) > Math.abs(distance);
   }
 }

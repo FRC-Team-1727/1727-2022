@@ -4,57 +4,38 @@
 
 package frc.robot.commands.auton;
 
-import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.UptakeSubsystem;
 
 import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class SetDriveCommand extends CommandBase {
+/** An example command that uses an example subsystem. */
+public class UptakeAutoCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-
-  private final DriveSubsystem m_subsystem;
-
-  private final double left;
-  private final double right;
-
+  private final UptakeSubsystem m_subsystem;
+  private double speed;
   /**
-   * Creates a new ExampleCommand.
+   * Creates a new UptakeCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public SetDriveCommand(DriveSubsystem subsystem, double left, double right) {
+  public UptakeAutoCommand(UptakeSubsystem subsystem, double speed) {
     m_subsystem = subsystem;
-
-    this.left = left;
-    this.right = right;
-    
+    this.speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
-
-  }
-
-  public SetDriveCommand(DriveSubsystem subsystem, double speed) {
-    m_subsystem = subsystem;
-
-    left = speed;
-    right = speed;
-    
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
-
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_subsystem.setDrive(left, right);
+    m_subsystem.move(speed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    m_subsystem.setDrive(left, right);
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override

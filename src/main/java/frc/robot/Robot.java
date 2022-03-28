@@ -49,15 +49,15 @@ public class Robot extends TimedRobot {
 
           Mat mat = new Mat();
 
-          while (!Thread.interrupted()) {
-            if (cvSink.grabFrame(mat) == 0) {
-              outputStream.notifyError(cvSink.getError());
-              continue;
-            }
-            Imgproc.rectangle(
-                mat, new Point(100, 100), new Point(2000, 2000), new Scalar(255, 255, 255), 5);
-            outputStream.putFrame(mat);
-          }
+          // while (!Thread.interrupted()) {
+          //   if (cvSink.grabFrame(mat) == 0) {
+          //     outputStream.notifyError(cvSink.getError());
+          //     continue;
+          //   }
+          //   Imgproc.rectangle(
+          //       mat, new Point(100, 100), new Point(2000, 2000), new Scalar(255, 255, 255), 5);
+          //   outputStream.putFrame(mat);
+          // }
         });
     m_visionThread.setDaemon(true);
     m_visionThread.start();

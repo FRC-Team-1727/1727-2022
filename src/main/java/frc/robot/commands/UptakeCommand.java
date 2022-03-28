@@ -22,10 +22,10 @@ public class UptakeCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public UptakeCommand(UptakeSubsystem subsystem, DoubleSupplier speed, DoubleSupplier speedTwo) {
+  public UptakeCommand(UptakeSubsystem subsystem, DoubleSupplier speed) {
     m_subsystem = subsystem;
     this.speed = speed;
-    this.speedTwo = speedTwo;
+    // this.speedTwo = speedTwo;
     this.counter = 0;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -40,20 +40,18 @@ public class UptakeCommand extends CommandBase {
   public void execute() {
 
     //look over this: (if approved, delete this comment)
-      if (speed.getAsDouble() < 0.1 && speedTwo.getAsDouble() < 0.1) {
+      if (speed.getAsDouble() < 0.1/* && speedTwo.getAsDouble() < 0.1*/) {
         m_subsystem.grayWheelSetSpeed(-0.30);
         m_subsystem.greenWheelSetSpeed(0);
       } else if (speed.getAsDouble() >= 0.1) {
         counter++;
-        if (counter < 40) m_subsystem.move(speed.getAsDouble());
-        else if (counter < 60) m_subsystem.move(0);
+        m_subsystem.greenWheelSetSpeed(speed.getAsDouble()*.5);
+        if (counter < 20) m_subsystem.grayWheelSetSpeed(speed.getAsDouble()*0.75);
+        else if (counter < 60) m_subsystem.grayWheelSetSpeed(0);
         else counter = 0;
-      } else if (speedTwo.getAsDouble() >= 0.1) {
-        counter++;
-        if (counter < 40) m_subsystem.move(-speedTwo.getAsDouble());         
-        else if (counter < 60) m_subsystem.move(0);
-        else counter = 0;
-      } else counter = 0;
+      }/* else if (speedTwo.getAsDouble() >= 0.1) {
+        //m_subsystem.move(-speedTwo.getAsDouble()*0.4);
+      }*/ else counter = 0;
     
   }
 

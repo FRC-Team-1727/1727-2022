@@ -41,6 +41,7 @@ public class DriveCommand extends CommandBase {
   @Override
   public void execute() {
     m_subsystem.arcade(x.getAsDouble(), y.getAsDouble());
+    // m_subsystem.printEncoders();
   }
 
   // Called once the command ends or is interrupted.

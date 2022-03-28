@@ -2,25 +2,25 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.auton;
 
-import frc.robot.subsystems.UptakeSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class UptakeAutoCommand extends CommandBase {
+public class IntakeAutoCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final UptakeSubsystem m_subsystem;
+  private final IntakeSubsystem m_subsystem;
   private double speed;
   /**
-   * Creates a new UptakeCommand.
+   * Creates a new IntakeCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public UptakeAutoCommand(UptakeSubsystem subsystem, double speed) {
+  public IntakeAutoCommand(IntakeSubsystem subsystem, double speed) {
     m_subsystem = subsystem;
     this.speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -30,7 +30,7 @@ public class UptakeAutoCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_subsystem.move(speed);
+    m_subsystem.intake(speed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

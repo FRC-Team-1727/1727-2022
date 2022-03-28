@@ -30,8 +30,13 @@ public class DriveSubsystem extends SubsystemBase {
     public DriveSubsystem() {
         // lEncoder.setDistancePerPulse(kWheelDiameter * Math.PI / 256);
         // rEncoder.setDistancePerPulse(kWheelDiameter * Math.PI / 256);
-        for(CANSparkMax m : lDrive) m.getEncoder().setPositionConversionFactor(42);
-        for(CANSparkMax m : rDrive) m.getEncoder().setPositionConversionFactor(42);
+        for(CANSparkMax m : lDrive) m.getEncoder().setPositionConversionFactor(kEncoderConversion);
+        for(CANSparkMax m : rDrive) {
+            m.getEncoder().setPositionConversionFactor(kEncoderConversion);
+            m.setInverted(true);
+        }
+
+        resetEncoders();
     }
 
     @Override
@@ -68,7 +73,7 @@ public class DriveSubsystem extends SubsystemBase {
     private void setRDrive(double spd) {
         //move rDrive
         for (CANSparkMax m : rDrive) {
-            m.set(-spd);
+            m.set(spd);
         }
     }
 
@@ -94,12 +99,29 @@ public class DriveSubsystem extends SubsystemBase {
     public double getEncoderAverage() {
         double total = 0;
         for(CANSparkMax m : lDrive) total += m.getEncoder().getPosition();
-        for(CANSparkMax m : rDrive) total -= m.getEncoder().getPosition();
+        for(CANSparkMax m : rDrive) total += m.getEncoder().getPosition();
+        return total / 4;
+    }
+
+    public double getAbsoluteEncoderAverage() {
+        double total = 0;
+        for(CANSparkMax m : lDrive) total += Math.abs(m.getEncoder().getPosition());
+        for(CANSparkMax m : rDrive) total += Math.abs(m.getEncoder().getPosition());
         return total / 4;
     }
 
     public void resetEncoders() {
         for(CANSparkMax m : lDrive) m.getEncoder().setPosition(0);
         for(CANSparkMax m : rDrive) m.getEncoder().setPosition(0);
+    }
+
+    public void printEncoders() {
+        System.out.println(
+            lDrive[0].getEncoder().getPosition() + " " + 
+            lDrive[1].getEncoder().getPosition() + " " + 
+            rDrive[0].getEncoder().getPosition() + " " +
+            rDrive[1].getEncoder().getPosition() + " " +
+            getEncoderAverage()
+        );
     }
 }
