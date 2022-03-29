@@ -65,6 +65,8 @@ public class RobotContainer {
     // //m_climbSubsystem.setDefaultCommand(new ClimbMoveCommand(m_climbSubsystem, () -> xboxTwo.getLeftY(), () -> xboxTwo.getRightY()));
     // // m_climbSubsystem.setDefaultCommand(new ClimbMoveCommand(m_climbSubsystem, ()->xbox.getLeftTriggerAxis()));
     // // m_compressorSubsystem.setDefaultCommand(new CompressorCommand(m_compressorSubsystem));
+
+    m_uptakeSubsystem.setDefaultCommand(new UptakeTestCommand(m_uptakeSubsystem, ()->xbox.getLeftTriggerAxis(), ()->xbox.getRightTriggerAxis()));
   }
 
   /**
@@ -74,7 +76,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    System.out.println("FIOEJFOE SJFOI ESJFIOJFOEFJ IOSJ FOIJSIOFKSOFH UESHF IUSKF");
+    new JoystickButton(xbox, Button.kA.value).whileHeld(new UptakeMoveCommand(m_uptakeSubsystem, 1));
+
     // new JoystickButton(xbox, Button.kRightBumper.value).whenPressed(new IntakePistonCommand(m_intakeSubsystem));
     // //new JoystickButton(xbox, Button.kB.value).whenHeld(new OuttakeCommand(m_intakeSubsystem));
 

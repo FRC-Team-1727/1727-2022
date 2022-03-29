@@ -6,26 +6,21 @@ package frc.robot.commands;
 
 import frc.robot.subsystems.UptakeSubsystem;
 
-import java.util.function.DoubleSupplier;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class UptakeTestCommand extends CommandBase {
+public class UptakeMoveCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final UptakeSubsystem m_subsystem;
-  private final DoubleSupplier speed;
-  private final DoubleSupplier speedTwo;
-
+  private final double speed;
   /**
-   * Creates a new UptakeTestCommand.
+   * Creates a new UptakeMoveCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public UptakeTestCommand(UptakeSubsystem subsystem, DoubleSupplier speed, DoubleSupplier speedTwo) {
+  public UptakeMoveCommand(UptakeSubsystem subsystem, double speed) {
     m_subsystem = subsystem;
     this.speed = speed;
-    this.speedTwo = speedTwo;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -37,8 +32,7 @@ public class UptakeTestCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.grayWheelSetSpeed(speed.getAsDouble());
-    m_subsystem.greenWheelSetSpeed(speedTwo.getAsDouble());
+    m_subsystem.move(speed);
   }
 
   // Called once the command ends or is interrupted.
@@ -48,6 +42,6 @@ public class UptakeTestCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
