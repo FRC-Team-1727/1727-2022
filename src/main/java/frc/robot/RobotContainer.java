@@ -39,15 +39,16 @@ import frc.robot.commands.auton.ComplexAutoCommand;
 
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
-  private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
-  private final VisionSubsystem m_visionSubsystem = new VisionSubsystem();
-  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
-  private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
+  // private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
+  // private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
+  // private final VisionSubsystem m_visionSubsystem = new VisionSubsystem();
+  // private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  // private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
+  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final UptakeSubsystem m_uptakeSubsystem = new UptakeSubsystem();
   // private final CompressorSubsystem m_compressorSubsystem = new CompressorSubsystem();
 
-  private final Command m_autoCommand = new ComplexAutoCommand(m_driveSubsystem, m_shooterSubsystem, m_uptakeSubsystem, m_intakeSubsystem);
+  private final Command m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   XboxController xbox = new XboxController(kXboxPort[0]);
   // XboxController xboxTwo = new XboxController(kXboxPort[1]);
