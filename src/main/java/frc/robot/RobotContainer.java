@@ -14,8 +14,8 @@ import static frc.robot.Constants.XboxConstants.*;
 
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
-import frc.robot.commands.auton.AutoCommand;
-import frc.robot.commands.auton.ComplexAutoCommand;
+import frc.robot.commands.auton.autos.OneBallAuto;
+import frc.robot.commands.auton.autos.TwoBallAuto;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -47,7 +47,7 @@ public class RobotContainer {
   private final UptakeSubsystem m_uptakeSubsystem = new UptakeSubsystem();
   // private final CompressorSubsystem m_compressorSubsystem = new CompressorSubsystem();
 
-  private final Command m_autoCommand = new ComplexAutoCommand(m_driveSubsystem, m_shooterSubsystem, m_uptakeSubsystem, m_intakeSubsystem);
+  private final Command m_autoCommand = new TwoBallAuto(m_driveSubsystem, m_shooterSubsystem, m_uptakeSubsystem, m_intakeSubsystem);
 
   XboxController xbox = new XboxController(kXboxPort[0]);
   // XboxController xboxTwo = new XboxController(kXboxPort[1]);

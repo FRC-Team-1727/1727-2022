@@ -2,11 +2,15 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.auton;
+package frc.robot.commands.auton.autos;
 
 import frc.robot.commands.IntakePistonCommand;
 import frc.robot.commands.IntakePistonTestCommand;
 import frc.robot.commands.ShooterSpeedCommand;
+import frc.robot.commands.auton.DriveDistanceCommand;
+import frc.robot.commands.auton.IntakeAutoCommand;
+import frc.robot.commands.auton.SetDriveCommand;
+import frc.robot.commands.auton.TurnCommand;
 import frc.robot.commands.auton.UptakeAutoCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -17,7 +21,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import static frc.robot.Constants.ShooterConstants.*;
 
 /** An example command that uses an example subsystem. */
-public class ComplexAutoCommand extends SequentialCommandGroup {
+public class TwoBallAuto extends SequentialCommandGroup {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
 
   /**
@@ -25,7 +29,7 @@ public class ComplexAutoCommand extends SequentialCommandGroup {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ComplexAutoCommand(DriveSubsystem drive, ShooterSubsystem shooter, UptakeSubsystem uptake, IntakeSubsystem intake) {
+  public TwoBallAuto(DriveSubsystem drive, ShooterSubsystem shooter, UptakeSubsystem uptake, IntakeSubsystem intake) {
     addCommands(
       new ShooterSpeedCommand(shooter, kFarSpeed), //power up flywheel
       //shoot first ball
