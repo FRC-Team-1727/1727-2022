@@ -39,28 +39,28 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    m_visionThread = new Thread(
-        () -> {
-          UsbCamera camera = CameraServer.startAutomaticCapture();
-          camera.setResolution(640, 480);
+    // m_visionThread = new Thread(
+    //     () -> {
+    //       UsbCamera camera = CameraServer.startAutomaticCapture();
+    //       camera.setResolution(640, 480);
 
-          CvSink cvSink = CameraServer.getVideo();
-          CvSource outputStream = CameraServer.putVideo("Rectangle", 640, 480);
+    //       CvSink cvSink = CameraServer.getVideo();
+    //       CvSource outputStream = CameraServer.putVideo("Rectangle", 640, 480);
 
-          Mat mat = new Mat();
+    //       Mat mat = new Mat();
 
-          // while (!Thread.interrupted()) {
-          //   if (cvSink.grabFrame(mat) == 0) {
-          //     outputStream.notifyError(cvSink.getError());
-          //     continue;
-          //   }
-          //   Imgproc.rectangle(
-          //       mat, new Point(100, 100), new Point(2000, 2000), new Scalar(255, 255, 255), 5);
-          //   outputStream.putFrame(mat);
-          // }
-        });
-    m_visionThread.setDaemon(true);
-    m_visionThread.start();
+    //       while (!Thread.interrupted()) {
+    //         if (cvSink.grabFrame(mat) == 0) {
+    //           outputStream.notifyError(cvSink.getError());
+    //           continue;
+    //         }
+    //         Imgproc.rectangle(
+    //             mat, new Point(100, 100), new Point(2000, 2000), new Scalar(255, 255, 255), 5);
+    //         outputStream.putFrame(mat);
+    //       }
+    //     });
+    // m_visionThread.setDaemon(true);
+    // m_visionThread.start();
   }
 
   /**
