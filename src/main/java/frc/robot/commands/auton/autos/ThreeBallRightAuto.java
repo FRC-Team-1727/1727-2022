@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.IntakePistonCommand;
 import frc.robot.commands.auton.DriveDistanceCommand;
+import frc.robot.commands.auton.DriveTime;
 import frc.robot.commands.auton.FirstShotAuto;
 import frc.robot.commands.auton.IntakeAutoCommand;
 import frc.robot.commands.auton.TurnCommand;
@@ -31,7 +32,8 @@ public class ThreeBallRightAuto extends SequentialCommandGroup {
             //aim?
             new UptakeAutoCommand(uptake, .75),
             new WaitCommand(1.5),
-            new UptakeAutoCommand(uptake, 0)
+            new UptakeAutoCommand(uptake, 0),
+            new DriveTime(drive, 3, -.25)
         );
     }
 }
