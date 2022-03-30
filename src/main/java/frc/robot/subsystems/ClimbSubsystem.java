@@ -4,11 +4,7 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -99,13 +95,17 @@ public class ClimbSubsystem extends SubsystemBase {
   //PID version of move()
   public void climb(double speed) {
     position += speed * kClimbSpeed;
-    if(position < 0) {
+    if (position < 0) {
       position = 0;
-    } else if(position > kClimbMax) {
+    } else if (position > kClimbMax) {
       position = kClimbMax;
     }
     controllers[0].setReference(position, ControlType.kPosition);
     controllers[1].setReference(-position, ControlType.kPosition);
+
+    //limits
+    if (!leftLimit.get()) motors[0].getEncoder().setPosition(0);
+    if (!rightLimit.get()) motors[1].getEncoder().setPosition(0);
   }
 
   public void move(int id, double speed) {
@@ -113,6 +113,7 @@ public class ClimbSubsystem extends SubsystemBase {
       speed *= -1;
     }
     motors[id].set(speed * kClimbSpeed);
+    System.out.println(motors[0].getEncoder().getPosition() + " " + motors[1].getEncoder().getPosition() + leftLimit.get() + " " + rightLimit.get());
   }
  
   @Override
