@@ -23,9 +23,9 @@ public class OneBallAuto extends SequentialCommandGroup {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public OneBallAuto(DriveSubsystem drive, ShooterSubsystem shooter, UptakeSubsystem uptake) {
+  public OneBallAuto(DriveSubsystem drive, ShooterSubsystem shooter, UptakeSubsystem uptake, boolean far) {
     addCommands(
-        new FirstShotAuto(shooter, uptake, true),
+        new FirstShotAuto(shooter, uptake, far),
         new DriveDistanceCommand(drive, -40, 0.25)
     );
   }
