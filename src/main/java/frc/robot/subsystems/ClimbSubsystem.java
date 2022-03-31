@@ -90,6 +90,8 @@ public class ClimbSubsystem extends SubsystemBase {
     
     // motors[0].set(speed);
     // motors[1].set(-speed);
+
+    
   }
 
   //PID version of move()
@@ -106,6 +108,8 @@ public class ClimbSubsystem extends SubsystemBase {
     //limits
     if (!leftLimit.get()) motors[0].getEncoder().setPosition(0);
     if (!rightLimit.get()) motors[1].getEncoder().setPosition(0);
+
+    System.out.println(motors[0].getEncoder().getPosition() + " " + motors[1].getEncoder().getPosition());
   }
 
   public void move(int id, double speed) {
@@ -113,12 +117,12 @@ public class ClimbSubsystem extends SubsystemBase {
       speed *= -1;
     }
     motors[id].set(speed * kClimbSpeed);
-    System.out.println(motors[0].getEncoder().getPosition() + " " + motors[1].getEncoder().getPosition() + leftLimit.get() + " " + rightLimit.get());
   }
  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    // System.out.println(!leftLimit.get() + " " + !rightLimit.get());
   }
 
   @Override

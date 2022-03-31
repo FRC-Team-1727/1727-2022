@@ -59,7 +59,7 @@ public class RobotContainer {
     // default commands hehehehaw
     m_driveSubsystem.setDefaultCommand(new DriveCommand(m_driveSubsystem,()->xbox.getLeftX(), ()->-xbox.getRightY()));
     m_intakeSubsystem.setDefaultCommand(new IntakeCommand(m_intakeSubsystem,()->xbox.getRightTriggerAxis()));
-    m_uptakeSubsystem.setDefaultCommand(new UptakeCommand(m_uptakeSubsystem, ()->xbox.getLeftTriggerAxis()));
+    // m_uptakeSubsystem.setDefaultCommand(new UptakeCommand(m_uptakeSubsystem, ()->xbox.getLeftTriggerAxis()));
     // m_climbSubsystem.setDefaultCommand(new ClimbCommand(m_climbSubsystem, xbox.getPOV()));
     m_shooterSubsystem.setDefaultCommand(new ShooterCommand(m_shooterSubsystem));
     //m_climbSubsystem.setDefaultCommand(new ClimbMoveCommand(m_climbSubsystem, () -> xboxTwo.getLeftY(), () -> xboxTwo.getRightY()));
