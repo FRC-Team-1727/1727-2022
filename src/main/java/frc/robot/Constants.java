@@ -70,8 +70,9 @@ public final class Constants {
     }
 
     public static final class ClimbConstants {
-        //ENTER LIMIT SWITCH PORTS!!!
         public static final int[] kLimitPort = new int[] {7, 9};
+        
+        public static final int[] kClimbPistonPort = new int[] {/* ENTER PORTS HERE */};
 
         public static final int[] kClimbPort = new int[] {50,51};
         public static final double kClimbSpeed =  1; //0.1; //set the right speed (this is in rotations per tick)
