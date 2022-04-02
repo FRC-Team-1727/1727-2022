@@ -13,10 +13,17 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import static frc.robot.Constants.ClimbConstants.*;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ClimbSubsystem extends SubsystemBase {
   private float position;
+  
+  private DoubleSolenoid climbPiston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, kClimbPistonPort[0], kClimbPistonPort[1]);
 
   private DigitalInput leftLimit = new DigitalInput(kLimitPort[0]);
   private DigitalInput rightLimit = new DigitalInput(kLimitPort[1]);
@@ -36,6 +43,8 @@ public class ClimbSubsystem extends SubsystemBase {
   
   /** Creates a new ClimbSubsystem. */
   public ClimbSubsystem() {
+    climbPiston.set(kForward);
+    
     for (CANSparkMax m : motors) {
       m.setIdleMode(IdleMode.kBrake);
     }
@@ -117,6 +126,10 @@ public class ClimbSubsystem extends SubsystemBase {
       speed *= -1;
     }
     motors[id].set(speed * kClimbSpeed);
+  }
+  
+  public void toggleClimbPiston(){
+    climbPiston.toggle();
   }
  
   @Override
