@@ -43,7 +43,7 @@ public class ClimbSubsystem extends SubsystemBase {
   
   /** Creates a new ClimbSubsystem. */
   public ClimbSubsystem() {
-    climbPiston.set(kForward);
+    climbPiston.set(kReverse);
     
     for (CANSparkMax m : motors) {
       m.setIdleMode(IdleMode.kBrake);
@@ -51,12 +51,12 @@ public class ClimbSubsystem extends SubsystemBase {
     controllers[0].setFeedbackDevice(motors[0].getEncoder());
     controllers[1].setFeedbackDevice(motors[1].getEncoder());
     position = 0;
-    //updateConstants();
+    updateConstants();
   }
 
   private void updateConstants() {
     for (SparkMaxPIDController controller : controllers) {
-      controller.setOutputRange(0, 1);
+      controller.setOutputRange(-1, 1);
       controller.setP(kP);
       controller.setI(kI);
       controller.setD(kD);
@@ -111,14 +111,9 @@ public class ClimbSubsystem extends SubsystemBase {
     } else if (position > kClimbMax) {
       position = kClimbMax;
     }
-    controllers[0].setReference(position, ControlType.kPosition);
-    controllers[1].setReference(-position, ControlType.kPosition);
+    
 
-    //limits
-    if (!leftLimit.get()) motors[0].getEncoder().setPosition(0);
-    if (!rightLimit.get()) motors[1].getEncoder().setPosition(0);
-
-    System.out.println(motors[0].getEncoder().getPosition() + " " + motors[1].getEncoder().getPosition());
+    // System.out.println(motors[0].getEncoder().getPosition() + " " + motors[1].getEncoder().getPosition());
   }
 
   public void move(int id, double speed) {
@@ -136,6 +131,12 @@ public class ClimbSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     // System.out.println(!leftLimit.get() + " " + !rightLimit.get());
+    //limits
+    if (!leftLimit.get()) motors[0].getEncoder().setPosition(0);
+    if (!rightLimit.get()) motors[1].getEncoder().setPosition(0);
+    controllers[0].setReference(position, ControlType.kPosition);
+    controllers[1].setReference(-position, ControlType.kPosition);
+    System.out.println(motors[0].getEncoder().getPosition() + " " + motors[1].getEncoder().getPosition() + " " + position);
   }
 
   @Override

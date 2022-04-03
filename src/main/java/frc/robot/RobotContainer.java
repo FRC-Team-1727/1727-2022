@@ -50,7 +50,7 @@ public class RobotContainer {
   private final Command m_autoCommand = new TwoBallAuto(m_driveSubsystem, m_shooterSubsystem, m_uptakeSubsystem, m_intakeSubsystem);
 
   XboxController xbox = new XboxController(kXboxPort[0]);
-  // XboxController xboxTwo = new XboxController(kXboxPort[1]);
+  XboxController xboxTwo = new XboxController(kXboxPort[1]);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -59,7 +59,7 @@ public class RobotContainer {
     // default commands hehehehaw
     m_driveSubsystem.setDefaultCommand(new DriveCommand(m_driveSubsystem,()->xbox.getLeftX(), ()->-xbox.getRightY()));
     m_intakeSubsystem.setDefaultCommand(new IntakeCommand(m_intakeSubsystem,()->xbox.getRightTriggerAxis()));
-    // m_uptakeSubsystem.setDefaultCommand(new UptakeCommand(m_uptakeSubsystem, ()->xbox.getLeftTriggerAxis()));
+    m_uptakeSubsystem.setDefaultCommand(new UptakeCommand(m_uptakeSubsystem, ()->xbox.getRightTriggerAxis(), ()->xbox.getLeftTriggerAxis()));
     // m_climbSubsystem.setDefaultCommand(new ClimbCommand(m_climbSubsystem, xbox.getPOV()));
     m_shooterSubsystem.setDefaultCommand(new ShooterCommand(m_shooterSubsystem));
     //m_climbSubsystem.setDefaultCommand(new ClimbMoveCommand(m_climbSubsystem, () -> xboxTwo.getLeftY(), () -> xboxTwo.getRightY()));
@@ -87,8 +87,9 @@ public class RobotContainer {
     //MAKE KEYBIND TO START FLYWHEEL, USE FlywheelStartCommand on whenPressed
 
 
-    new JoystickButton(xbox, Button.kY.value).whenHeld(new ClimbMoveCommand(m_climbSubsystem, 1));
-    new JoystickButton(xbox, Button.kB.value).whenHeld(new ClimbMoveCommand(m_climbSubsystem, -1));
+    new JoystickButton(xboxTwo, Button.kY.value).whenHeld(new ClimbMoveCommand(m_climbSubsystem, 1));
+    new JoystickButton(xboxTwo, Button.kB.value).whenHeld(new ClimbMoveCommand(m_climbSubsystem, -1));
+    new JoystickButton(xboxTwo, Button.kX.value).whenPressed(new ClimbPistonCommand(m_climbSubsystem));
 
   }
 

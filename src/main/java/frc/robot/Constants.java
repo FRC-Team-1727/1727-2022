@@ -27,8 +27,8 @@ public final class Constants {
     public static final class IntakeConstants {
         public static final int kIntakePort = 4;
         public static final int[][] kIntakePistonPort = new int[][] {
-            {2,3},
-            {6,7}
+            {2,3}
+            //,{6,7}
         };
         public static final double kIntakeMultiplier = 0.8d;
     }
@@ -71,17 +71,17 @@ public final class Constants {
     }
 
     public static final class ClimbConstants {
-        public static final int[] kLimitPort = new int[] {7, 9};
+        public static final int[] kLimitPort = new int[] {5, 9};
         
-        public static final int[] kClimbPistonPort = new int[] {/* ENTER PORTS HERE */};
+        public static final int[] kClimbPistonPort = new int[] {6, 7};
 
         public static final int[] kClimbPort = new int[] {50,51};
-        public static final double kClimbSpeed =  1; //0.1; //set the right speed (this is in rotations per tick)
-        public static final float kClimbMax = 10; //change to rotation value when climb is at full height
+        public static final double kClimbSpeed =  2; //0.1; //set the right speed (this is in rotations per tick)
+        public static final float kClimbMax = 160; //change to rotation value when climb is at full height
 
         // PID CONSTANTS HAVE NOT BEEN TUNED CORRECTLY YET!!!
-        public static final double kP = 0.001;
-        public static final double kI = 0.000002;
+        public static final double kP = .04;
+        public static final double kI = 0.00000;
         public static final double kD = 0;
         public static final double kF = 0;
     }
