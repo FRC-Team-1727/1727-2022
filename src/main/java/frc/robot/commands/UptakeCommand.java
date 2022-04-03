@@ -14,19 +14,19 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class UptakeCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final UptakeSubsystem m_subsystem;
-  private DoubleSupplier speed;
-  private DoubleSupplier speedTwo;
-  private int counter;
+  private final DoubleSupplier intakeSpeed;
+  private final DoubleSupplier uptakeSpeed;
+
   /**
    * Creates a new UptakeCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public UptakeCommand(UptakeSubsystem subsystem, DoubleSupplier speed) {
+  public UptakeCommand(UptakeSubsystem subsystem, DoubleSupplier intakeSpeed, DoubleSupplier uptakeSpeed) {
     m_subsystem = subsystem;
-    this.speed = speed;
-    // this.speedTwo = speedTwo;
-    this.counter = 0;
+    this.intakeSpeed = intakeSpeed;
+    this.uptakeSpeed = uptakeSpeed;
+    
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -39,30 +39,11 @@ public class UptakeCommand extends CommandBase {
   @Override
   public void execute() {
 
-    //look over this: (if approved, delete this comment)
-      if (speed.getAsDouble() < 0.1/* && speedTwo.getAsDouble() < 0.1*/) {
-        m_subsystem.grayWheelSetSpeed(-0.30);
-        m_subsystem.greenWheelSetSpeed(0);
-      } else if (speed.getAsDouble() >= 0.1) {
-        counter++;
-        m_subsystem.greenWheelSetSpeed(speed.getAsDouble()*.5);
-        if (counter < 20) m_subsystem.grayWheelSetSpeed(speed.getAsDouble()*0.75);
-        else if (counter < 60) m_subsystem.grayWheelSetSpeed(0);
-        else counter = 0;
-      }/* else if (speedTwo.getAsDouble() >= 0.1) {
-        //m_subsystem.move(-speedTwo.getAsDouble()*0.4);
-      }*/ else counter = 0;
-    
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    if (speed.getAsDouble() < 0.1f) {
-      m_subsystem.grayWheelSetSpeed(-0.30);
-      m_subsystem.greenWheelSetSpeed(0);
-    }
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

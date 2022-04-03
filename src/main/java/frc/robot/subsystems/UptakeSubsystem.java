@@ -9,6 +9,7 @@ import static frc.robot.Constants.UptakeConstants.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class UptakeSubsystem extends SubsystemBase {
@@ -16,6 +17,8 @@ public class UptakeSubsystem extends SubsystemBase {
     new VictorSPX(kUptakePort[0]),
     new VictorSPX(kUptakePort[1])
   };
+
+  private DigitalInput beamBreak = new DigitalInput(kBeamBreakPort);
   
   /** Creates a new UptakeSubsystem. */
   public UptakeSubsystem() {}
@@ -24,6 +27,16 @@ public class UptakeSubsystem extends SubsystemBase {
     for (VictorSPX m : motor) {
       // m.set(ControlMode.PercentOutput, speed * 0.22);
       m.set(ControlMode.PercentOutput, speed);
+    }
+  }
+
+  public void index(double intake, double uptake) {
+    if (intake > 0) {
+      greenWheelSetSpeed(intake);
+      if(beamBreak.get()) grayWheelSetSpeed(intake);
+      else grayWheelSetSpeed(0);
+    } else {
+      move(uptake);
     }
   }
 

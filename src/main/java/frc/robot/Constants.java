@@ -35,6 +35,7 @@ public final class Constants {
 
     public static final class UptakeConstants {
         public static final int[] kUptakePort = new int[] {5, 2};
+        public static final int kBeamBreakPort = 6;
     }
 
     public static final class XboxConstants {

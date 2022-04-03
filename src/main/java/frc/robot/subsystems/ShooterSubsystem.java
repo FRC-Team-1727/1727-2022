@@ -59,6 +59,14 @@ public class ShooterSubsystem extends SubsystemBase {
     curSpeed = spd;
   }
 
+  public void startup() {
+    if (hoodPiston.get() == kForward) {
+      setSpeed(kFarSpeed);
+    } else {
+      setSpeed(kCloseSpeed);
+    }
+  }
+
   public void stop() {
     controller.setReference(0, ControlType.kDutyCycle);
   }
