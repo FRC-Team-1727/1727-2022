@@ -35,7 +35,7 @@ public class UptakeSubsystem extends SubsystemBase {
       move(uptake);
     } else {
       greenWheelSetSpeed(intake);
-      if(beamBreak.get()) grayWheelSetSpeed(intake);
+      if(!beamBreak.get()) grayWheelSetSpeed(intake);
       else grayWheelSetSpeed(0);
     }
   }
@@ -51,6 +51,7 @@ public class UptakeSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    System.out.println(!beamBreak.get());
   }
 
   @Override

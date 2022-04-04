@@ -136,7 +136,7 @@ public class ClimbSubsystem extends SubsystemBase {
     if (!rightLimit.get()) motors[1].getEncoder().setPosition(0);
     controllers[0].setReference(position, ControlType.kPosition);
     controllers[1].setReference(-position, ControlType.kPosition);
-    System.out.println(motors[0].getEncoder().getPosition() + " " + motors[1].getEncoder().getPosition() + " " + position);
+    // System.out.println(motors[0].getEncoder().getPosition() + " " + motors[1].getEncoder().getPosition() + " " + position);
   }
 
   @Override
