@@ -50,7 +50,11 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void move() {
-    controller.setReference(curSpeed, ControlType.kVelocity);
+    if(curSpeed <= 0) {
+      stop();
+    } else {
+      controller.setReference(curSpeed, ControlType.kVelocity);
+    }
     // System.out.println(curSpeed);
   }
 
@@ -118,6 +122,9 @@ public class ShooterSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    if(flywheel[0].getEncoder().getVelocity() > 0) {
+      System.out.println(flywheel[0].getEncoder().getVelocity() + " " + flywheel[1].getEncoder().getVelocity());
+    }
   }
 
   @Override
