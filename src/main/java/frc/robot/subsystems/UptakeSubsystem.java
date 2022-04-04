@@ -31,12 +31,12 @@ public class UptakeSubsystem extends SubsystemBase {
   }
 
   public void index(double intake, double uptake) {
-    if (intake > 0) {
+    if (uptake > 0.1) {
+      move(uptake);
+    } else {
       greenWheelSetSpeed(intake);
       if(beamBreak.get()) grayWheelSetSpeed(intake);
       else grayWheelSetSpeed(0);
-    } else {
-      move(uptake);
     }
   }
 
