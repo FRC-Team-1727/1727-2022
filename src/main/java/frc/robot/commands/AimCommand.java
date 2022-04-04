@@ -40,6 +40,8 @@ public class AimCommand extends CommandBase {
   public void execute() {
     if(m_visionSubsystem.hasTarget()) {
       m_driveSubsystem.aim(m_visionSubsystem.getAngleX());
+    } else {
+      m_driveSubsystem.aim(10);
     }
     // m_shooterSubsystem.aim(kVisionHeight / Math.tan(kVisionAngle + m_visionSubsystem.getAngleY()) + kHubRadius);
   }
