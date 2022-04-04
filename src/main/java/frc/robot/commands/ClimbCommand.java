@@ -5,28 +5,23 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.ClimbSubsystem;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
 public class ClimbCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final ClimbSubsystem m_subsystem;
-  private int speed;
+  private final double speed;
+
   /**
-   * Creates a new ClimbCommand.
+   * Creates a new ClimbMoveCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ClimbCommand(ClimbSubsystem subsystem, int pov) {
+  public ClimbCommand(ClimbSubsystem subsystem, double speed) {
     m_subsystem = subsystem;
-    if (pov == -1) {
-      speed = 0;
-    } else if (pov > 270 || pov < 90) {
-      speed = 1;
-    } else {
-      speed = -1;
-    }
-    speed = pov;
+    this.speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -38,12 +33,14 @@ public class ClimbCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.move(speed);
+    m_subsystem.climb(speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    // m_subsystem.move(0);
+  }
 
   // Returns true when the command should end.
   @Override

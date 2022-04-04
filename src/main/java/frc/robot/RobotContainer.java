@@ -89,9 +89,10 @@ public class RobotContainer {
     //MAKE KEYBIND TO START FLYWHEEL, USE FlywheelStartCommand on whenPressed
 
 
-    new JoystickButton(xboxTwo, Button.kY.value).whenHeld(new ClimbMoveCommand(m_climbSubsystem, 1));
-    new JoystickButton(xboxTwo, Button.kB.value).whenHeld(new ClimbMoveCommand(m_climbSubsystem, -1));
+    new JoystickButton(xboxTwo, Button.kY.value).whenHeld(new ClimbCommand(m_climbSubsystem, 1));
+    new JoystickButton(xboxTwo, Button.kB.value).whenHeld(new ClimbCommand(m_climbSubsystem, -1));
     new JoystickButton(xboxTwo, Button.kX.value).whenPressed(new ClimbPistonCommand(m_climbSubsystem));
+    new JoystickButton(xboxTwo, Button.kBack.value).whenHeld(new ClimbMoveCommand(m_climbSubsystem, -1));
 
   }
 
