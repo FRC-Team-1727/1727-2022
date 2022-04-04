@@ -56,8 +56,8 @@ public final class Constants {
         public static final double kHoodChangeThreshold = 0;
 
         public static final double kDefaultSpeed = 0;
-        public static final double kFarSpeed = 13500;
-        public static final double kCloseSpeed = 13500;
+        public static final double kFarSpeed = 13000;
+        public static final double kCloseSpeed = 13000;
     }
 
     public static final class AimConstants {
