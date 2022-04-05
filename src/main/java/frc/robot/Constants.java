@@ -50,14 +50,14 @@ public final class Constants {
 
         public static final double kP = 0.00005;
         public static final double kI = 0.00000;
-        public static final double kD = 0; //2
+        public static final double kD = 1.8; //2
         public static final double kF = 0;
 
         public static final double kHoodChangeThreshold = 0;
 
         public static final double kDefaultSpeed = 0;
-        public static final double kFarSpeed = 13000;
-        public static final double kCloseSpeed = 13000;
+        public static final double kFarSpeed = 13500;
+        public static final double kCloseSpeed = 11500;
     }
 
     public static final class AimConstants {
@@ -65,9 +65,10 @@ public final class Constants {
         public static final double kVisionHeight = 104 - 23; //reflective tape height = 8'8" or 104"
         public static final double kHubRadius = 34;
 
-        public static final double kP = 0.01;
+        public static final double kP = 0.005;
         public static final double kI = 0;
         public static final double kD = 0;
+        public static final double kAimThreshold = 0.3;
     }
 
     public static final class ClimbConstants {
@@ -80,8 +81,8 @@ public final class Constants {
         public static final float kClimbMax = 160; //change to rotation value when climb is at full height
 
         // PID CONSTANTS HAVE NOT BEEN TUNED CORRECTLY YET!!!
-        public static final double kP = .04;
-        public static final double kI = 0.00000;
+        public static final double kP = .05;
+        public static final double kI = 0.000001;
         public static final double kD = 0;
         public static final double kF = 0;
     }

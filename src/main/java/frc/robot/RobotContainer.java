@@ -15,6 +15,7 @@ import static frc.robot.Constants.XboxConstants.*;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import frc.robot.commands.auton.autos.OneBallAuto;
+import frc.robot.commands.auton.autos.SimpleTwoBallAuto;
 import frc.robot.commands.auton.autos.TwoBallAuto;
 
 /**
@@ -47,7 +48,7 @@ public class RobotContainer {
   private final UptakeSubsystem m_uptakeSubsystem = new UptakeSubsystem();
   // private final CompressorSubsystem m_compressorSubsystem = new CompressorSubsystem();
 
-  private final Command m_autoCommand = new TwoBallAuto(m_driveSubsystem, m_shooterSubsystem, m_uptakeSubsystem, m_intakeSubsystem);
+  private final Command m_autoCommand = new SimpleTwoBallAuto(m_driveSubsystem, m_shooterSubsystem, m_uptakeSubsystem, m_intakeSubsystem, m_visionSubsystem);
 
   XboxController xbox = new XboxController(kXboxPort[0]);
   XboxController xboxTwo = new XboxController(kXboxPort[1]);
@@ -58,10 +59,10 @@ public class RobotContainer {
     configureButtonBindings();
     // default commands hehehehaw
     m_driveSubsystem.setDefaultCommand(new DriveCommand(m_driveSubsystem,()->xbox.getLeftX(), ()->-xbox.getRightY()));
-    m_intakeSubsystem.setDefaultCommand(new IntakeCommand(m_intakeSubsystem,()->xbox.getRightTriggerAxis()));
-    m_uptakeSubsystem.setDefaultCommand(new UptakeCommand(m_uptakeSubsystem, ()->xbox.getRightTriggerAxis(), ()->xbox.getLeftTriggerAxis()));
+    m_intakeSubsystem.setDefaultCommand(new IntakeCommand(m_intakeSubsystem,()->xbox.getRightTriggerAxis(), ()->xboxTwo.getRightTriggerAxis()));
+    m_uptakeSubsystem.setDefaultCommand(new UptakeCommand(m_uptakeSubsystem, ()->xbox.getRightTriggerAxis(), ()->xbox.getLeftTriggerAxis(), ()->xboxTwo.getLeftTriggerAxis()));
     // m_climbSubsystem.setDefaultCommand(new ClimbCommand(m_climbSubsystem, xbox.getPOV()));
-    m_shooterSubsystem.setDefaultCommand(new ShooterCommand(m_shooterSubsystem));
+    m_shooterSubsystem.setDefaultCommand(new ShooterCommand(m_shooterSubsystem, m_uptakeSubsystem));
     //m_climbSubsystem.setDefaultCommand(new ClimbMoveCommand(m_climbSubsystem, () -> xboxTwo.getLeftY(), () -> xboxTwo.getRightY()));
     // m_climbSubsystem.setDefaultCommand(new ClimbMoveCommand(m_climbSubsystem, ()->xbox.getLeftTriggerAxis()));
     // m_compressorSubsystem.setDefaultCommand(new CompressorCommand(m_compressorSubsystem));
@@ -79,14 +80,15 @@ public class RobotContainer {
     //new JoystickButton(xbox, Button.kB.value).whenHeld(new OuttakeCommand(m_intakeSubsystem));
 
     //aiming
-    new JoystickButton(xbox, Button.kLeftBumper.value).whileHeld(new AimCommand(m_driveSubsystem, m_visionSubsystem, m_shooterSubsystem));
+    new JoystickButton(xbox, Button.kLeftBumper.value).whileHeld(new AimCommand(m_driveSubsystem, m_visionSubsystem));
+    new JoystickButton(xbox, Button.kLeftBumper.value).whenPressed(new FlywheelStartCommand(m_shooterSubsystem, m_uptakeSubsystem));
 
     //flywheel manual control 
-    new JoystickButton(xbox, Button.kStart.value).whenPressed(new ToggleHoodCommand(m_shooterSubsystem, m_uptakeSubsystem));
+    new JoystickButton(xboxTwo, Button.kStart.value).whenPressed(new ToggleHoodCommand(m_shooterSubsystem, m_uptakeSubsystem));
+
     new JoystickButton(xbox, Button.kBack.value).whenPressed(new ShooterSpeedCommand(m_shooterSubsystem, 0));
-    //MAKE KEYBIND TO START FLYWHEEL, USE FlywheelStartCommand on whenPressed
 
-
+    //climb
     new JoystickButton(xboxTwo, Button.kY.value).whenHeld(new ClimbCommand(m_climbSubsystem, 1));
     new JoystickButton(xboxTwo, Button.kB.value).whenHeld(new ClimbCommand(m_climbSubsystem, -1));
     new JoystickButton(xboxTwo, Button.kA.value).whenPressed(new ClimbPistonCommand(m_climbSubsystem));

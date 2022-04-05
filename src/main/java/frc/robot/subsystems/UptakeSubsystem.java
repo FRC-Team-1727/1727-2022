@@ -19,9 +19,15 @@ public class UptakeSubsystem extends SubsystemBase {
   };
 
   private DigitalInput beamBreak = new DigitalInput(kBeamBreakPort);
-  
+
+  private boolean shooting;
+  private boolean triggerHeld;
+
   /** Creates a new UptakeSubsystem. */
-  public UptakeSubsystem() {}
+  public UptakeSubsystem() {
+    shooting = false;
+    triggerHeld = false;
+  }
 
   public void move(double speed) {
     for (VictorSPX m : motor) {
@@ -30,12 +36,17 @@ public class UptakeSubsystem extends SubsystemBase {
     }
   }
 
-  public void index(double intake, double uptake) {
-    if (uptake > 0.1) {
-      move(uptake);
+  public void index(double intake, double uptake, double outtake) {
+    if(outtake > 0.1) {
+      move(-outtake);
+    } else if (uptake > 0.1) {
+      move(uptake * 0.5);
+      triggerHeld = true;
+      shooting = true;
     } else {
+      triggerHeld = false;
       greenWheelSetSpeed(intake);
-      if(!beamBreak.get()) grayWheelSetSpeed(intake);
+      if(beamBreak.get()) grayWheelSetSpeed(intake);
       else grayWheelSetSpeed(0);
     }
   }
@@ -48,10 +59,18 @@ public class UptakeSubsystem extends SubsystemBase {
     motor[1].set(ControlMode.PercentOutput, speed);
   }
 
+  public void setShooting(boolean value) {
+    shooting = value;
+  }
+
+  public boolean hasBeenReleased() {
+    return shooting && !triggerHeld;
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // System.out.println(!beamBreak.get());
+    // System.out.println(beamBreak.get());
   }
 
   @Override

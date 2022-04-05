@@ -2,27 +2,29 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.auton;
 
-import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.UptakeSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.VisionSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import static frc.robot.Constants.AimConstants.*;
 
 /** An example command that uses an example subsystem. */
-public class ShooterCommand extends CommandBase {
+public class AimAutoCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ShooterSubsystem m_shooterSubsystem;
-  private final UptakeSubsystem m_uptakeSubsystem; 
+  private final DriveSubsystem m_driveSubsystem;
+  private final VisionSubsystem m_visionSubsystem;
+
   /**
-   * Creates a new ShooterCommand.
+   * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ShooterCommand(ShooterSubsystem shooter, UptakeSubsystem uptake) {
-    m_shooterSubsystem = shooter;
-    m_uptakeSubsystem = uptake;
+  public AimAutoCommand(DriveSubsystem drive, VisionSubsystem vision) {
+    m_driveSubsystem = drive;
+    m_visionSubsystem = vision;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooter);
+    addRequirements(drive);
   }
 
   // Called when the command is initially scheduled.
@@ -32,20 +34,20 @@ public class ShooterCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_shooterSubsystem.move();
-    if(m_uptakeSubsystem.hasBeenReleased()) {
-      m_uptakeSubsystem.setShooting(false);
-      m_shooterSubsystem.stop();
+    if(m_visionSubsystem.hasTarget()) {
+      m_driveSubsystem.aim(m_visionSubsystem.getAngleX() * kP);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_driveSubsystem.setDrive(0, 0);
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return Math.abs(m_visionSubsystem.getAngleX()) < 0.2;
   }
 }

@@ -16,6 +16,7 @@ import static frc.robot.Constants.ShooterConstants.*;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -64,7 +65,7 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void startup() {
-    if (hoodPiston.get() == kForward) {
+    if (hoodPiston.get() == kReverse) {
       setSpeed(kFarSpeed);
     } else {
       setSpeed(kCloseSpeed);
@@ -72,6 +73,7 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void stop() {
+    curSpeed = 0;
     controller.setReference(0, ControlType.kDutyCycle);
   }
 
@@ -104,14 +106,14 @@ public class ShooterSubsystem extends SubsystemBase {
   public void setHood(boolean value) {
     if(value) {
       hoodPiston.set(kReverse);
-      setSpeed(kFarSpeed);
+      if (curSpeed > 0) setSpeed(kFarSpeed);
       System.out.println("Hood is FARRRRRRRRRRRRRRRR");
-      System.out.println(curSpeed);
+      // System.out.println(curSpeed);
     } else {
       hoodPiston.set(kForward);
-      setSpeed(kCloseSpeed);
+      if (curSpeed > 0) setSpeed(kCloseSpeed);
       System.out.println("Hood is CLOSE");
-      System.out.println(curSpeed);
+      // System.out.println(curSpeed);
     }
   }
 
@@ -122,9 +124,11 @@ public class ShooterSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    if(flywheel[0].getEncoder().getVelocity() > 0) {
-      System.out.println(flywheel[0].getEncoder().getVelocity() + " " + flywheel[1].getEncoder().getVelocity());
-    }
+    // if(flywheel[0].getEncoder().getVelocity() > 0) {
+    //   System.out.println(flywheel[0].getEncoder().getVelocity() + " " + flywheel[1].getEncoder().getVelocity());
+    // }
+
+    SmartDashboard.putNumber("flywheel speed", flywheel[0].getEncoder().getVelocity());
   }
 
   @Override

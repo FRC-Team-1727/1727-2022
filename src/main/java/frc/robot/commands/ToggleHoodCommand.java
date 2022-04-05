@@ -41,13 +41,11 @@ public class ToggleHoodCommand extends CommandBase {
       // m_subsystem.setSpeed(kFarSpeed);
       
     }
-    m_uptake.grayWheelSetSpeed(-0.1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_uptake.grayWheelSetSpeed(-0.1);
   }
 
   // Called once the command ends or is interrupted.

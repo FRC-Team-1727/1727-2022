@@ -5,7 +5,6 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import static frc.robot.Constants.AimConstants.*;
@@ -16,19 +15,17 @@ public class AimCommand extends CommandBase {
 
   private final DriveSubsystem m_driveSubsystem;
   private final VisionSubsystem m_visionSubsystem;
-  private final ShooterSubsystem m_shooterSubsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public AimCommand(DriveSubsystem dsubsystem, VisionSubsystem vsubsystem, ShooterSubsystem ssubsystem) {
+  public AimCommand(DriveSubsystem dsubsystem, VisionSubsystem vsubsystem) {
     m_driveSubsystem = dsubsystem;
     m_visionSubsystem = vsubsystem;
-    m_shooterSubsystem = ssubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(dsubsystem, vsubsystem, ssubsystem);
+    addRequirements(dsubsystem, vsubsystem);
   }
 
   // Called when the command is initially scheduled.

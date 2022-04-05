@@ -89,11 +89,13 @@ public class DriveSubsystem extends SubsystemBase {
     //vision aiming
 
     public void aim(double angle) {
-        if(pid != null) {
-            double spd = pid.calculate(angle); //use pid.setSetpoint?
-            setDrive(spd, -spd);
+        // if(pid != null) {
+        //     double spd = pid.calculate(angle); //use pid.setSetpoint?
+        //     setDrive(spd, -spd);
+        // }
+        if(Math.abs(angle) > kAimThreshold) {
+            setDrive(angle * kP, -angle * kP);
         }
-        setDrive(angle * kP, -angle * kP);
     }
 
     public double getEncoderAverage() {
