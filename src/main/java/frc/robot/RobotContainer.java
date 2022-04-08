@@ -48,7 +48,7 @@ public class RobotContainer {
   private final UptakeSubsystem m_uptakeSubsystem = new UptakeSubsystem();
   // private final CompressorSubsystem m_compressorSubsystem = new CompressorSubsystem();
 
-  private final Command m_autoCommand = new SimpleTwoBallAuto(m_driveSubsystem, m_shooterSubsystem, m_uptakeSubsystem, m_intakeSubsystem, m_visionSubsystem);
+  private final Command m_autoCommand = new OneBallAuto(m_driveSubsystem, m_shooterSubsystem, m_uptakeSubsystem, false);
 
   XboxController xbox = new XboxController(kXboxPort[0]);
   XboxController xboxTwo = new XboxController(kXboxPort[1]);
@@ -81,10 +81,11 @@ public class RobotContainer {
 
     //aiming
     new JoystickButton(xbox, Button.kLeftBumper.value).whileHeld(new AimCommand(m_driveSubsystem, m_visionSubsystem));
-    new JoystickButton(xbox, Button.kLeftBumper.value).whenPressed(new FlywheelStartCommand(m_shooterSubsystem, m_uptakeSubsystem));
+    new JoystickButton(xboxTwo, Button.kRightBumper.value).whenPressed(new ShooterStartupCommand(m_shooterSubsystem));
+    new JoystickButton(xboxTwo, Button.kRightBumper.value).whenReleased(new ShooterSpeedCommand(m_shooterSubsystem, 0));
 
     //flywheel manual control 
-    new JoystickButton(xboxTwo, Button.kStart.value).whenPressed(new ToggleHoodCommand(m_shooterSubsystem, m_uptakeSubsystem));
+    new JoystickButton(xboxTwo, Button.kStart.value).whenPressed(new ToggleHoodCommand(m_shooterSubsystem));
 
     new JoystickButton(xbox, Button.kBack.value).whenPressed(new ShooterSpeedCommand(m_shooterSubsystem, 0));
 
@@ -93,6 +94,9 @@ public class RobotContainer {
     new JoystickButton(xboxTwo, Button.kB.value).whenHeld(new ClimbCommand(m_climbSubsystem, -1));
     new JoystickButton(xboxTwo, Button.kA.value).whenPressed(new ClimbPistonCommand(m_climbSubsystem));
     new JoystickButton(xboxTwo, Button.kBack.value).whenHeld(new ClimbMoveCommand(m_climbSubsystem, -1));
+
+    //invert drive
+    new JoystickButton(xboxTwo, Button.kLeftBumper.value).whenPressed(new DriveInvertCommand(m_driveSubsystem));
 
   }
 

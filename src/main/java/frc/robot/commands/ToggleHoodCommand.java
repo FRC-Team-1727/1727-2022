@@ -14,19 +14,16 @@ import static frc.robot.Constants.ShooterConstants.*;
 public class ToggleHoodCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final ShooterSubsystem m_subsystem;
-  private final UptakeSubsystem m_uptake;
 
   /**
    * Creates a new ToggleHoodCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ToggleHoodCommand(ShooterSubsystem subsystem, UptakeSubsystem uptake) {
+  public ToggleHoodCommand(ShooterSubsystem subsystem) {
     m_subsystem = subsystem;
-    m_uptake = uptake;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
-    addRequirements(uptake);
   }
 
   // Called when the command is initially scheduled.

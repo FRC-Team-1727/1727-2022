@@ -7,6 +7,7 @@ package frc.robot.commands.auton.autos;
 import frc.robot.commands.IntakePistonCommand;
 import frc.robot.commands.IntakePistonTestCommand;
 import frc.robot.commands.ShooterSpeedCommand;
+import frc.robot.commands.ToggleHoodCommand;
 import frc.robot.commands.auton.DriveDistanceCommand;
 import frc.robot.commands.auton.IntakeAutoCommand;
 import frc.robot.commands.auton.SetDriveCommand;
@@ -31,7 +32,8 @@ public class TwoBallAuto extends SequentialCommandGroup {
    */
   public TwoBallAuto(DriveSubsystem drive, ShooterSubsystem shooter, UptakeSubsystem uptake, IntakeSubsystem intake) {
     addCommands(
-      new ShooterSpeedCommand(shooter, kFarSpeed), //power up flywheel
+      new ShooterSpeedCommand(shooter, kFarSpeed), //power up flywheel,
+      new ToggleHoodCommand(shooter),
       //shoot first ball
       new WaitCommand(2),
       new UptakeAutoCommand(uptake, .75),
@@ -57,7 +59,8 @@ public class TwoBallAuto extends SequentialCommandGroup {
       //taxi
       new SetDriveCommand(drive, -0.25, -0.25),
       new WaitCommand(3),
-      new SetDriveCommand(drive, 0, 0)
+      new SetDriveCommand(drive, 0, 0),
+      new ShooterSpeedCommand(shooter, 0)
     );
     addRequirements(uptake, intake);
   }

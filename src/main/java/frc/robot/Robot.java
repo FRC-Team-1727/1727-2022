@@ -28,7 +28,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-  private Thread m_visionThread;
+  // private Thread m_visionThread;
 
   /**
    * This function is run when the robot is first started up and should be used for any

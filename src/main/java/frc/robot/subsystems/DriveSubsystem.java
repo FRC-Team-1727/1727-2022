@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class DriveSubsystem extends SubsystemBase {
 
     public PIDController pid;
+    private boolean inverted;
 
     private CANSparkMax[] lDrive = new CANSparkMax[]{
             new CANSparkMax(kLDrivePort[0], MotorType.kBrushless),
@@ -30,11 +31,17 @@ public class DriveSubsystem extends SubsystemBase {
     public DriveSubsystem() {
         // lEncoder.setDistancePerPulse(kWheelDiameter * Math.PI / 256);
         // rEncoder.setDistancePerPulse(kWheelDiameter * Math.PI / 256);
-        for(CANSparkMax m : lDrive) m.getEncoder().setPositionConversionFactor(kEncoderConversion);
+        for(CANSparkMax m : lDrive) {
+            m.getEncoder().setPositionConversionFactor(kEncoderConversion);
+            m.burnFlash();
+        }
         for(CANSparkMax m : rDrive) {
             m.getEncoder().setPositionConversionFactor(kEncoderConversion);
             m.setInverted(true);
+            m.burnFlash();
         }
+
+        inverted = false;
 
         resetEncoders();
     }
@@ -58,6 +65,16 @@ public class DriveSubsystem extends SubsystemBase {
         }
 
         setDrive(y + x, y - x);
+    }
+
+    //inverting
+
+    public void invert() {
+        inverted = !inverted;
+    }
+
+    public boolean isInverted() {
+        return inverted;
     }
 
 

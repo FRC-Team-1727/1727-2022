@@ -7,14 +7,11 @@ import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.UptakeSubsystem;
 
 public class FlywheelStartCommand extends SequentialCommandGroup {
-    public FlywheelStartCommand(ShooterSubsystem shooter, UptakeSubsystem uptake) {
+    public FlywheelStartCommand(ShooterSubsystem shooter) {
         addCommands(
-            new UptakeAutoCommand(uptake, -0.5),
             new WaitCommand(.5),
-            new UptakeAutoCommand(uptake, 0),
-            new ShooterStartupCommand(shooter),
-            new WaitCommand(0.5)
+            new ShooterStartupCommand(shooter)
         );
-        addRequirements(shooter, uptake);
+        addRequirements(shooter);
     }
 }

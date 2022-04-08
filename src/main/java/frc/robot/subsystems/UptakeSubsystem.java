@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class UptakeSubsystem extends SubsystemBase {
@@ -20,6 +21,7 @@ public class UptakeSubsystem extends SubsystemBase {
 
   private DigitalInput beamBreak = new DigitalInput(kBeamBreakPort);
 
+  private boolean preparing;
   private boolean shooting;
   private boolean triggerHeld;
 
@@ -27,6 +29,7 @@ public class UptakeSubsystem extends SubsystemBase {
   public UptakeSubsystem() {
     shooting = false;
     triggerHeld = false;
+    preparing = false;
   }
 
   public void move(double speed) {
@@ -37,17 +40,29 @@ public class UptakeSubsystem extends SubsystemBase {
   }
 
   public void index(double intake, double uptake, double outtake) {
-    if(outtake > 0.1) {
+    // if(outtake > 0.1) {
+    //   move(-outtake);
+    // } else if (uptake > 0.1) {
+    //   move(uptake * 0.5);
+    //   triggerHeld = true;
+    //   shooting = true;
+    //   preparing = false;
+    // } else {
+    //   triggerHeld = false;
+    //   greenWheelSetSpeed(intake);
+    //   if(beamBreak.get()) grayWheelSetSpeed(intake);
+    //   else if (!preparing) grayWheelSetSpeed(0);
+    // }
+
+    if (outtake > 0.1) {
       move(-outtake);
     } else if (uptake > 0.1) {
-      move(uptake * 0.5);
-      triggerHeld = true;
-      shooting = true;
-    } else {
-      triggerHeld = false;
+      move(uptake);
+    } else if (intake > 0.1) {
+      grayWheelSetSpeed(-.2);
       greenWheelSetSpeed(intake);
-      if(beamBreak.get()) grayWheelSetSpeed(intake);
-      else grayWheelSetSpeed(0);
+    } else {
+      move(0);
     }
   }
 
@@ -63,6 +78,10 @@ public class UptakeSubsystem extends SubsystemBase {
     shooting = value;
   }
 
+  public void setPreparing(boolean value) {
+    preparing = value;
+  }
+
   public boolean hasBeenReleased() {
     return shooting && !triggerHeld;
   }
@@ -71,6 +90,8 @@ public class UptakeSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     // System.out.println(beamBreak.get());
+    SmartDashboard.putBoolean("beam break", beamBreak.get());
+    System.out.println(shooting + " " + triggerHeld + " " + preparing + " ");
   }
 
   @Override

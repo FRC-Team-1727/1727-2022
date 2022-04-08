@@ -47,7 +47,7 @@ public class ShooterSubsystem extends SubsystemBase {
     stop();
     updateConstants();
     curSpeed = kDefaultSpeed;
-    hoodPiston.set(kReverse);
+    hoodPiston.set(kForward);
   }
 
   public void move() {
@@ -129,6 +129,10 @@ public class ShooterSubsystem extends SubsystemBase {
     // }
 
     SmartDashboard.putNumber("flywheel speed", flywheel[0].getEncoder().getVelocity());
+    SmartDashboard.putBoolean("hood", getHoodValue() == kReverse);
+
+    if (getHoodValue() == kForward) SmartDashboard.putString("hoodValue", "close");
+    else SmartDashboard.putString("hoodValue", "far");
   }
 
   @Override

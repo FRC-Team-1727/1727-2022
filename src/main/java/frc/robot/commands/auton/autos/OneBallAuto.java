@@ -26,7 +26,9 @@ public class OneBallAuto extends SequentialCommandGroup {
   public OneBallAuto(DriveSubsystem drive, ShooterSubsystem shooter, UptakeSubsystem uptake, boolean far) {
     addCommands(
         new FirstShotAuto(shooter, uptake, far),
-        new DriveDistanceCommand(drive, -40, 0.25)
+        new SetDriveCommand(drive, -.25, -.25),
+        new WaitCommand(5),
+        new SetDriveCommand(drive, 0, 0)
     );
   }
 

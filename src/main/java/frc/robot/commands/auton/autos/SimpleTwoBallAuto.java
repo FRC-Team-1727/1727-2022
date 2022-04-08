@@ -3,6 +3,7 @@ package frc.robot.commands.auton.autos;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.FlywheelStartCommand;
+import frc.robot.commands.IndexerSeparateCommand;
 import frc.robot.commands.IntakePistonCommand;
 import frc.robot.commands.ShooterSpeedCommand;
 import frc.robot.commands.ShooterStartupCommand;
@@ -32,7 +33,8 @@ public class SimpleTwoBallAuto extends SequentialCommandGroup {
             new AimAutoCommand(drive, vision),
             new IntakePistonCommand(intake),
             new WaitCommand(1),
-            new FlywheelStartCommand(shooter, uptake),
+            new FlywheelStartCommand(shooter),
+            new IndexerSeparateCommand(uptake),
             new UptakeAutoCommand(uptake, 0.5),
             new WaitCommand(2),
             new UptakeAutoCommand(uptake, 0),

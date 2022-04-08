@@ -33,10 +33,6 @@ public class ShooterCommand extends CommandBase {
   @Override
   public void execute() {
     m_shooterSubsystem.move();
-    if(m_uptakeSubsystem.hasBeenReleased()) {
-      m_uptakeSubsystem.setShooting(false);
-      m_shooterSubsystem.stop();
-    }
   }
 
   // Called once the command ends or is interrupted.

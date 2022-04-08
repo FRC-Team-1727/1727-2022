@@ -78,9 +78,8 @@ public final class Constants {
 
         public static final int[] kClimbPort = new int[] {50,51};
         public static final double kClimbSpeed =  2; //0.1; //set the right speed (this is in rotations per tick)
-        public static final float kClimbMax = 160; //change to rotation value when climb is at full height
+        public static final float kClimbMax = 170; //change to rotation value when climb is at full height
 
-        // PID CONSTANTS HAVE NOT BEEN TUNED CORRECTLY YET!!!
         public static final double kP = .05;
         public static final double kI = 0.000001;
         public static final double kD = 0;
