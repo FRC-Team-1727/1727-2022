@@ -32,7 +32,7 @@ public class TwoBallAuto extends SequentialCommandGroup {
    */
   public TwoBallAuto(DriveSubsystem drive, ShooterSubsystem shooter, UptakeSubsystem uptake, IntakeSubsystem intake) {
     addCommands(
-      new ShooterSpeedCommand(shooter, kFarSpeed), //power up flywheel,
+      new ShooterSpeedCommand(shooter, 11500), //power up flywheel,
       new ToggleHoodCommand(shooter),
       //shoot first ball
       new WaitCommand(2),

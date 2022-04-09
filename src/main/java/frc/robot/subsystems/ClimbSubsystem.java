@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj.DigitalInput;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -136,6 +138,8 @@ public class ClimbSubsystem extends SubsystemBase {
     if (!rightLimit.get()) motors[1].getEncoder().setPosition(0);
     controllers[0].setReference(position, ControlType.kPosition);
     controllers[1].setReference(-position, ControlType.kPosition);
+    SmartDashboard.putBoolean("left limit", !leftLimit.get());
+    SmartDashboard.putBoolean("right limit", !rightLimit.get());
     // System.out.println(motors[0].getEncoder().getPosition() + " " + motors[1].getEncoder().getPosition() + " " + position);
   }
 

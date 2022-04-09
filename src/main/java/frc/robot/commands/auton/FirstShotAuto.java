@@ -11,7 +11,8 @@ public class FirstShotAuto extends SequentialCommandGroup{
     public FirstShotAuto(ShooterSubsystem shooter, UptakeSubsystem uptake, boolean far) {
         double speed;
         if (far) speed = kFarSpeed;
-        else speed = kCloseSpeed;
+        // else speed = kCloseSpeed;
+        else speed = 11500;
         addCommands(
             new ShooterSpeedCommand(shooter, speed),
             new WaitCommand(2),

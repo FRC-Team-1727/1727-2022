@@ -4,6 +4,7 @@
 
 package frc.robot.commands.auton.autos;
 
+import frc.robot.commands.ShooterSpeedCommand;
 import frc.robot.commands.auton.DriveDistanceCommand;
 import frc.robot.commands.auton.FirstShotAuto;
 import frc.robot.commands.auton.SetDriveCommand;
@@ -28,7 +29,8 @@ public class OneBallAuto extends SequentialCommandGroup {
         new FirstShotAuto(shooter, uptake, far),
         new SetDriveCommand(drive, -.25, -.25),
         new WaitCommand(5),
-        new SetDriveCommand(drive, 0, 0)
+        new SetDriveCommand(drive, 0, 0),
+        new ShooterSpeedCommand(shooter, 0)
     );
   }
 

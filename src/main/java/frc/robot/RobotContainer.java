@@ -84,6 +84,9 @@ public class RobotContainer {
     new JoystickButton(xboxTwo, Button.kRightBumper.value).whenPressed(new ShooterStartupCommand(m_shooterSubsystem));
     new JoystickButton(xboxTwo, Button.kRightBumper.value).whenReleased(new ShooterSpeedCommand(m_shooterSubsystem, 0));
 
+    new JoystickButton(xbox, Button.kX.value).whenHeld(new AdjustCommand(m_driveSubsystem, 0.1));
+    new JoystickButton(xbox, Button.kB.value).whenHeld(new AdjustCommand(m_driveSubsystem, -0.1));
+
     //flywheel manual control 
     new JoystickButton(xboxTwo, Button.kStart.value).whenPressed(new ToggleHoodCommand(m_shooterSubsystem));
 
@@ -96,7 +99,7 @@ public class RobotContainer {
     new JoystickButton(xboxTwo, Button.kBack.value).whenHeld(new ClimbMoveCommand(m_climbSubsystem, -1));
 
     //invert drive
-    new JoystickButton(xboxTwo, Button.kLeftBumper.value).whenPressed(new DriveInvertCommand(m_driveSubsystem));
+    new JoystickButton(xbox, Button.kX.value).whenPressed(new DriveInvertCommand(m_driveSubsystem));
 
   }
 

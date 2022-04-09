@@ -25,7 +25,7 @@ public final class Constants {
     }
 
     public static final class IntakeConstants {
-        public static final int kIntakePort = 4;
+        public static final int kIntakePort = 1;
         public static final int[][] kIntakePistonPort = new int[][] {
             {2,3}
             //,{6,7}
@@ -34,7 +34,7 @@ public final class Constants {
     }
 
     public static final class UptakeConstants {
-        public static final int[] kUptakePort = new int[] {5, 2};
+        public static final int[] kUptakePort = new int[] {2, 5};
         public static final int kBeamBreakPort = 6;
     }
 

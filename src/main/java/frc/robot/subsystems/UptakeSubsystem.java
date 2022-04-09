@@ -91,7 +91,7 @@ public class UptakeSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     // System.out.println(beamBreak.get());
     SmartDashboard.putBoolean("beam break", beamBreak.get());
-    System.out.println(shooting + " " + triggerHeld + " " + preparing + " ");
+    // System.out.println(shooting + " " + triggerHeld + " " + preparing + " ");
   }
 
   @Override
