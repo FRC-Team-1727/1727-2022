@@ -8,6 +8,7 @@ import frc.robot.commands.IntakePistonCommand;
 import frc.robot.commands.IntakePistonTestCommand;
 import frc.robot.commands.ShooterSpeedCommand;
 import frc.robot.commands.ToggleHoodCommand;
+import frc.robot.commands.auton.AimAutoCommand;
 import frc.robot.commands.auton.DriveDistanceCommand;
 import frc.robot.commands.auton.IntakeAutoCommand;
 import frc.robot.commands.auton.SetDriveCommand;
@@ -17,6 +18,7 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.UptakeSubsystem;
+import frc.robot.subsystems.VisionSubsystem;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import static frc.robot.Constants.ShooterConstants.*;
@@ -30,7 +32,7 @@ public class TwoBallAuto extends SequentialCommandGroup {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public TwoBallAuto(DriveSubsystem drive, ShooterSubsystem shooter, UptakeSubsystem uptake, IntakeSubsystem intake) {
+  public TwoBallAuto(DriveSubsystem drive, ShooterSubsystem shooter, UptakeSubsystem uptake, IntakeSubsystem intake, VisionSubsystem vision) {
     addCommands(
       new ShooterSpeedCommand(shooter, 11500), //power up flywheel,
       new ToggleHoodCommand(shooter),
@@ -50,6 +52,7 @@ public class TwoBallAuto extends SequentialCommandGroup {
       new DriveDistanceCommand(drive, -40, .25),
       new IntakeAutoCommand(intake, 0),
       new TurnCommand(drive, -160, .25),
+      new AimAutoCommand(drive, vision),
       new IntakePistonCommand(intake),
       new WaitCommand(0.5),
       // //shoot second ball

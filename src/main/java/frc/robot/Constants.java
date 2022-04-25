@@ -57,7 +57,7 @@ public final class Constants {
 
         public static final double kDefaultSpeed = 0;
         public static final double kFarSpeed = 13500;
-        public static final double kCloseSpeed = 11500;
+        public static final double kCloseSpeed = 14000;
     }
 
     public static final class AimConstants {
@@ -80,7 +80,7 @@ public final class Constants {
         public static final double kClimbSpeed =  2; //0.1; //set the right speed (this is in rotations per tick)
         public static final float kClimbMax = 170; //change to rotation value when climb is at full height
 
-        public static final double kP = .05;
+        public static final double kP = .1;
         public static final double kI = 0.000001;
         public static final double kD = 0;
         public static final double kF = 0;

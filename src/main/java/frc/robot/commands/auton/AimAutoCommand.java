@@ -36,8 +36,6 @@ public class AimAutoCommand extends CommandBase {
   public void execute() {
     if (m_visionSubsystem.hasTarget()) {
       m_driveSubsystem.aim(m_visionSubsystem.getAngleX() * kP);
-    } else {
-      m_driveSubsystem.aim(10);
     }
   }
 
@@ -50,6 +48,6 @@ public class AimAutoCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_visionSubsystem.hasTarget() && Math.abs(m_visionSubsystem.getAngleX()) < 0.2;
+    return !m_visionSubsystem.hasTarget() || Math.abs(m_visionSubsystem.getAngleX()) < 0.2;
   }
 }

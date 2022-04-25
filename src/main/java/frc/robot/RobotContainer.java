@@ -49,6 +49,7 @@ public class RobotContainer {
   // private final CompressorSubsystem m_compressorSubsystem = new CompressorSubsystem();
 
   private final Command m_autoCommand = new OneBallAuto(m_driveSubsystem, m_shooterSubsystem, m_uptakeSubsystem, false);
+  // private final Command m_autoCommand = new TwoBallAuto(m_driveSubsystem, m_shooterSubsystem, m_uptakeSubsystem, m_intakeSubsystem, m_visionSubsystem);
 
   XboxController xbox = new XboxController(kXboxPort[0]);
   XboxController xboxTwo = new XboxController(kXboxPort[1]);
@@ -84,8 +85,8 @@ public class RobotContainer {
     new JoystickButton(xboxTwo, Button.kRightBumper.value).whenPressed(new ShooterStartupCommand(m_shooterSubsystem));
     new JoystickButton(xboxTwo, Button.kRightBumper.value).whenReleased(new ShooterSpeedCommand(m_shooterSubsystem, 0));
 
-    new JoystickButton(xbox, Button.kX.value).whenHeld(new AdjustCommand(m_driveSubsystem, 0.1));
-    new JoystickButton(xbox, Button.kB.value).whenHeld(new AdjustCommand(m_driveSubsystem, -0.1));
+    new JoystickButton(xbox, Button.kX.value).whenHeld(new AdjustCommand(m_driveSubsystem, -0.05));
+    new JoystickButton(xbox, Button.kB.value).whenHeld(new AdjustCommand(m_driveSubsystem, 0.05));
 
     //flywheel manual control 
     new JoystickButton(xboxTwo, Button.kStart.value).whenPressed(new ToggleHoodCommand(m_shooterSubsystem));
@@ -99,7 +100,7 @@ public class RobotContainer {
     new JoystickButton(xboxTwo, Button.kBack.value).whenHeld(new ClimbMoveCommand(m_climbSubsystem, -1));
 
     //invert drive
-    new JoystickButton(xbox, Button.kX.value).whenPressed(new DriveInvertCommand(m_driveSubsystem));
+    new JoystickButton(xbox, Button.kA.value).whenPressed(new DriveInvertCommand(m_driveSubsystem));
 
   }
 

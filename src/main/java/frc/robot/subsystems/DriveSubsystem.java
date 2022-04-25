@@ -11,6 +11,7 @@ import static frc.robot.Constants.DriveConstants.*;
 import static frc.robot.Constants.AimConstants.*;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveSubsystem extends SubsystemBase {
@@ -33,11 +34,13 @@ public class DriveSubsystem extends SubsystemBase {
         // rEncoder.setDistancePerPulse(kWheelDiameter * Math.PI / 256);
         for(CANSparkMax m : lDrive) {
             m.getEncoder().setPositionConversionFactor(kEncoderConversion);
-            m.burnFlash();
+            m.setSmartCurrentLimit(40);
+            m.burnFlash(); 
         }
         for(CANSparkMax m : rDrive) {
             m.getEncoder().setPositionConversionFactor(kEncoderConversion);
             m.setInverted(true);
+            m.setSmartCurrentLimit(40);
             m.burnFlash();
         }
 
@@ -49,6 +52,10 @@ public class DriveSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+        SmartDashboard.putNumber("lDrive[0]= current ", lDrive[0].getOutputCurrent());
+        SmartDashboard.putNumber("lDrive[1]= current ", lDrive[1].getOutputCurrent());
+        SmartDashboard.putNumber("rDrive[0]= current ", rDrive[0].getOutputCurrent());
+        SmartDashboard.putNumber("rDrive[1]= current ", rDrive[1].getOutputCurrent());
     }
 
     @Override
