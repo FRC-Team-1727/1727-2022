@@ -39,8 +39,8 @@ public class DriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_subsystem.isInverted()) m_subsystem.arcade(-y.getAsDouble(), -x.getAsDouble());
-    else m_subsystem.arcade(x.getAsDouble(), y.getAsDouble());
+    if (m_subsystem.isInverted()) m_subsystem.arcade(-y.getAsDouble() * 0.7, -x.getAsDouble() * 0.7);
+    else m_subsystem.arcade(x.getAsDouble() * 0.7, y.getAsDouble() * 0.7);
     // m_subsystem.printEncoders();
   }
 
