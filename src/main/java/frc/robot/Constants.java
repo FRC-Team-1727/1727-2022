@@ -48,7 +48,7 @@ public final class Constants {
         public static final int kFlywheelEncoderPort = 10;
         public static final int[] kHoodPistonPort = new int[] {0,1};
 
-        public static final double kP = 0.00005;
+        public static final double kP = 0.00005;  
         public static final double kI = 0.00000;
         public static final double kD = 1.8; //2
         public static final double kF = 0;

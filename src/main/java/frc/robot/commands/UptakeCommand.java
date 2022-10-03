@@ -16,18 +16,16 @@ public class UptakeCommand extends CommandBase {
   private final UptakeSubsystem m_subsystem;
   private final DoubleSupplier intakeSpeed;
   private final DoubleSupplier uptakeSpeed;
-  private final DoubleSupplier outtakeSpeed;
 
   /**
    * Creates a new UptakeCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public UptakeCommand(UptakeSubsystem subsystem, DoubleSupplier intakeSpeed, DoubleSupplier uptakeSpeed, DoubleSupplier outtakeSpeed) {
+  public UptakeCommand(UptakeSubsystem subsystem, DoubleSupplier intakeSpeed, DoubleSupplier uptakeSpeed) {
     m_subsystem = subsystem;
     this.intakeSpeed = intakeSpeed;
     this.uptakeSpeed = uptakeSpeed;
-    this.outtakeSpeed = outtakeSpeed;
     
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -40,7 +38,7 @@ public class UptakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.index(intakeSpeed.getAsDouble(), uptakeSpeed.getAsDouble(), outtakeSpeed.getAsDouble());
+    m_subsystem.index(intakeSpeed.getAsDouble(), uptakeSpeed.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.

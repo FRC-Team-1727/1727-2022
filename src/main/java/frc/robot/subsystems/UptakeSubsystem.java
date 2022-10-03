@@ -39,7 +39,7 @@ public class UptakeSubsystem extends SubsystemBase {
     }
   }
 
-  public void index(double intake, double uptake, double outtake) {
+  public void index(double intake, double uptake) {
     // if(outtake > 0.1) {
     //   move(-outtake);
     // } else if (uptake > 0.1) {
@@ -54,9 +54,7 @@ public class UptakeSubsystem extends SubsystemBase {
     //   else if (!preparing) grayWheelSetSpeed(0);
     // }
 
-    if (outtake > 0.1) {
-      move(-outtake);
-    } else if (uptake > 0.1) {
+    if (uptake > 0.1) {
       move(uptake);
     } else if (intake > 0.1) {
       grayWheelSetSpeed(-.2);
