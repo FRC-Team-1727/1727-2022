@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
 public class AutoShootCommand extends CommandBase {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+  @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final ShooterSubsystem shooter;
   private final UptakeSubsystem uptake;
   private final double uptakeSpeed;
@@ -24,7 +24,8 @@ public class AutoShootCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public AutoShootCommand(ShooterSubsystem shooter, UptakeSubsystem uptake, DoubleSupplier uptakeSpeed, DoubleSupplier intakeSpeed) {
+  public AutoShootCommand(ShooterSubsystem shooter, UptakeSubsystem uptake, DoubleSupplier uptakeSpeed,
+      DoubleSupplier intakeSpeed) {
     this.shooter = shooter;
     this.uptake = uptake;
     this.uptakeSpeed = uptakeSpeed.getAsDouble();
@@ -35,20 +36,21 @@ public class AutoShootCommand extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(uptakeSpeed > 0.1) {
+    if (uptakeSpeed > 0.1) {
       shooter.setSpeed(kCloseSpeed);
     } else {
       shooter.stop();
     }
 
-    if(intakeSpeed > 0.1) {
+    if (intakeSpeed > 0.1) {
       uptake.move(-1);
-    } else if(shooter.atSpeed()) {
+    } else if (shooter.atSpeed()) {
       uptake.move(1);
     } else {
       uptake.move(0);
@@ -57,7 +59,8 @@ public class AutoShootCommand extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override
