@@ -98,6 +98,10 @@ public class ShooterSubsystem extends SubsystemBase {
     // controller.setReference(0, ControlType.kVelocity);
   }
 
+  public boolean atSpeed() {
+    return Math.abs(curSpeed - flywheel[0].getEncoder().getVelocity()) <= 10;
+  }
+
   public void increment(double speed) {
     curSpeed += speed;
     controller.setReference(curSpeed, ControlType.kVelocity);
@@ -129,6 +133,7 @@ public class ShooterSubsystem extends SubsystemBase {
     // }
 
     SmartDashboard.putNumber("flywheel speed", flywheel[0].getEncoder().getVelocity());
+    SmartDashboard.putNumber("flywheel target speed", curSpeed);
     SmartDashboard.putBoolean("hood", getHoodValue() == kReverse);
 
     if (getHoodValue() == kForward) SmartDashboard.putString("hoodValue", "close");
