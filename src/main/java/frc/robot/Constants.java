@@ -58,6 +58,9 @@ public final class Constants {
         public static final double kDefaultSpeed = 0;
         public static final double kFarSpeed = 13500;
         public static final double kCloseSpeed = 14000;
+
+        public static final double kConversionFactor = 5.091;
+        public static final int kSpeedTolerance = 100;
     }
 
     public static final class AimConstants {
@@ -72,7 +75,7 @@ public final class Constants {
     }
 
     public static final class ClimbConstants {
-        public static final int[] kLimitPort = new int[] {5, 9};
+        public static final int[] kLimitPort = new int[] {3, 9};
         
         public static final int[] kClimbPistonPort = new int[] {6, 7};
 

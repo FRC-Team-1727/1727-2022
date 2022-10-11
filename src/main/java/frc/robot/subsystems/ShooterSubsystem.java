@@ -62,6 +62,7 @@ public class ShooterSubsystem extends SubsystemBase {
   public void setSpeed(double spd) {
     controller.setReference(spd, ControlType.kVelocity);
     curSpeed = spd;
+    System.out.println(flywheel[0].getEncoder().getVelocity());
   }
 
   public void startup() {
@@ -99,7 +100,7 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public boolean atSpeed() {
-    return Math.abs(curSpeed - flywheel[0].getEncoder().getVelocity()) <= 10;
+    return Math.abs(curSpeed / kConversionFactor - flywheel[0].getEncoder().getVelocity()) <= kSpeedTolerance;
   }
 
   public void increment(double speed) {

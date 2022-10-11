@@ -9,6 +9,7 @@ import frc.robot.subsystems.UptakeSubsystem;
 import static frc.robot.Constants.ShooterConstants.*;
 import java.util.function.DoubleSupplier;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
@@ -16,8 +17,8 @@ public class AutoShootCommand extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final ShooterSubsystem shooter;
   private final UptakeSubsystem uptake;
-  private final double uptakeSpeed;
-  private final double intakeSpeed;
+  private final DoubleSupplier uptakeSpeed;
+  private final DoubleSupplier intakeSpeed;
 
   /**
    * Creates a new AutoShootCommand.
@@ -28,8 +29,8 @@ public class AutoShootCommand extends CommandBase {
       DoubleSupplier intakeSpeed) {
     this.shooter = shooter;
     this.uptake = uptake;
-    this.uptakeSpeed = uptakeSpeed.getAsDouble();
-    this.intakeSpeed = intakeSpeed.getAsDouble();
+    this.uptakeSpeed = uptakeSpeed;
+    this.intakeSpeed = intakeSpeed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter, uptake);
   }
@@ -42,15 +43,16 @@ public class AutoShootCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    double uptakeSpeed = this.uptakeSpeed.getAsDouble();
     if (uptakeSpeed > 0.1) {
       shooter.setSpeed(kCloseSpeed);
     } else {
       shooter.stop();
     }
 
-    if (intakeSpeed > 0.1) {
+    if (intakeSpeed.getAsDouble() > 0.1) {
       uptake.move(-1);
-    } else if (shooter.atSpeed()) {
+    } else if (uptakeSpeed > 0.1 && shooter.atSpeed()) {
       uptake.move(1);
     } else {
       uptake.move(0);

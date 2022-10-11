@@ -91,7 +91,7 @@ public class RobotContainer {
     //flywheel manual control 
     // new JoystickButton(xboxTwo, Button.kStart.value).whenPressed(new ToggleHoodCommand(m_shooterSubsystem));
 
-    new JoystickButton(xbox, Button.kBack.value).whenPressed(new ShooterSpeedCommand(m_shooterSubsystem, 0));
+    // new JoystickButton(xbox, Button.kBack.value).whenPressed(new ShooterSpeedCommand(m_shooterSubsystem, 0));
 
     //climb
     new JoystickButton(xbox, Button.kY.value).whenHeld(new ClimbCommand(m_climbSubsystem, 1));
