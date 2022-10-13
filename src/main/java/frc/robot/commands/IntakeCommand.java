@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import frc.robot.subsystems.IntakeSubsystem;
 
+import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -15,17 +16,19 @@ public class IntakeCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final IntakeSubsystem m_subsystem;
   private DoubleSupplier spd;
+  private BooleanSupplier outtake;
   /**
    * Creates a new IntakeCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public IntakeCommand(IntakeSubsystem subsystem, DoubleSupplier spd) {
+  public IntakeCommand(IntakeSubsystem subsystem, DoubleSupplier spd, BooleanSupplier outtake) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
 
     this.spd = spd;
+    this.outtake = outtake;
   }
 
   // Called when the command is initially scheduled.
@@ -35,7 +38,8 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.intake(spd.getAsDouble());
+    if(outtake.getAsBoolean()) m_subsystem.intake(-1);
+    else m_subsystem.intake(spd.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.

@@ -51,7 +51,8 @@ public class AutoShootCommand extends CommandBase {
     }
 
     if (intakeSpeed.getAsDouble() > 0.1) {
-      uptake.move(-1);
+      uptake.grayWheelSetSpeed(-1);
+      uptake.greenWheelSetSpeed(0);
     } else if (uptakeSpeed > 0.1 && shooter.atSpeed()) {
       uptake.move(1);
     } else {

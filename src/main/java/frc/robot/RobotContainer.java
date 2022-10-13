@@ -60,7 +60,7 @@ public class RobotContainer {
     configureButtonBindings();
     // default commands hehehehaw
     m_driveSubsystem.setDefaultCommand(new DriveCommand(m_driveSubsystem,()->xbox.getLeftX(), ()->-xbox.getRightY()));
-    m_intakeSubsystem.setDefaultCommand(new IntakeCommand(m_intakeSubsystem,()->xbox.getRightTriggerAxis()));
+    m_intakeSubsystem.setDefaultCommand(new IntakeCommand(m_intakeSubsystem,()->xbox.getRightTriggerAxis(), ()->xbox.getLeftBumper()));
     // m_uptakeSubsystem.setDefaultCommand(new UptakeCommand(m_uptakeSubsystem, ()->xbox.getRightTriggerAxis(), ()->xbox.getLeftTriggerAxis()));
     // m_climbSubsystem.setDefaultCommand(new ClimbCommand(m_climbSubsystem, xbox.getPOV()));
     m_shooterSubsystem.setDefaultCommand(new AutoShootCommand(m_shooterSubsystem, m_uptakeSubsystem, ()->xbox.getLeftTriggerAxis(), ()->xbox.getRightTriggerAxis()));
@@ -81,12 +81,12 @@ public class RobotContainer {
     //new JoystickButton(xbox, Button.kB.value).whenHeld(new OuttakeCommand(m_intakeSubsystem));
 
     //aiming
-    new JoystickButton(xbox, Button.kLeftBumper.value).whileHeld(new AimCommand(m_driveSubsystem, m_visionSubsystem));
+    // new JoystickButton(xbox, Button.kLeftBumper.value).whileHeld(new AimCommand(m_driveSubsystem, m_visionSubsystem));
     // new JoystickButton(xboxTwo, Button.kRightBumper.value).whenPressed(new ShooterStartupCommand(m_shooterSubsystem));
     // new JoystickButton(xboxTwo, Button.kRightBumper.value).whenReleased(new ShooterSpeedCommand(m_shooterSubsystem, 0));
 
-    new JoystickButton(xbox, Button.kX.value).whenHeld(new AdjustCommand(m_driveSubsystem, -0.05));
-    new JoystickButton(xbox, Button.kB.value).whenHeld(new AdjustCommand(m_driveSubsystem, 0.05));
+    // new JoystickButton(xbox, Button.kX.value).whenHeld(new AdjustCommand(m_driveSubsystem, -0.05));
+    // new JoystickButton(xbox, Button.kB.value).whenHeld(new AdjustCommand(m_driveSubsystem, 0.05));
 
     //flywheel manual control 
     // new JoystickButton(xboxTwo, Button.kStart.value).whenPressed(new ToggleHoodCommand(m_shooterSubsystem));
