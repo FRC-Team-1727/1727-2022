@@ -7,6 +7,8 @@ package frc.robot.commands;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.UptakeSubsystem;
 import static frc.robot.Constants.ShooterConstants.*;
+
+import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -19,6 +21,7 @@ public class AutoShootCommand extends CommandBase {
   private final UptakeSubsystem uptake;
   private final DoubleSupplier uptakeSpeed;
   private final DoubleSupplier intakeSpeed;
+  private final BooleanSupplier outtake;
 
   /**
    * Creates a new AutoShootCommand.
@@ -26,11 +29,12 @@ public class AutoShootCommand extends CommandBase {
    * @param subsystem The subsystem used by this command.
    */
   public AutoShootCommand(ShooterSubsystem shooter, UptakeSubsystem uptake, DoubleSupplier uptakeSpeed,
-      DoubleSupplier intakeSpeed) {
+      DoubleSupplier intakeSpeed, BooleanSupplier outtake) {
     this.shooter = shooter;
     this.uptake = uptake;
     this.uptakeSpeed = uptakeSpeed;
     this.intakeSpeed = intakeSpeed;
+    this.outtake = outtake;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter, uptake);
   }
@@ -50,11 +54,19 @@ public class AutoShootCommand extends CommandBase {
       shooter.stop();
     }
 
-    if (intakeSpeed.getAsDouble() > 0.1) {
+    if (outtake.getAsBoolean()) {
+      uptake.move(-1);
+    }
+    else if (intakeSpeed.getAsDouble() > 0.1) {
       uptake.grayWheelSetSpeed(-1);
       uptake.greenWheelSetSpeed(0);
-    } else if (uptakeSpeed > 0.1 && shooter.atSpeed()) {
-      uptake.move(1);
+    } else if (uptakeSpeed > 0.1) {
+      if (shooter.atSpeed()) {
+        uptake.move(1);
+      } else {
+        uptake.grayWheelSetSpeed(-0.1);
+        uptake.greenWheelSetSpeed(0);
+      }
     } else {
       uptake.move(0);
     }

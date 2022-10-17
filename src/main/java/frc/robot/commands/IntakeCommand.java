@@ -17,18 +17,20 @@ public class IntakeCommand extends CommandBase {
   private final IntakeSubsystem m_subsystem;
   private DoubleSupplier spd;
   private BooleanSupplier outtake;
+  private DoubleSupplier shoot;
   /**
    * Creates a new IntakeCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public IntakeCommand(IntakeSubsystem subsystem, DoubleSupplier spd, BooleanSupplier outtake) {
+  public IntakeCommand(IntakeSubsystem subsystem, DoubleSupplier spd, BooleanSupplier outtake, DoubleSupplier shoot) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
 
     this.spd = spd;
     this.outtake = outtake;
+    this.shoot = shoot;
   }
 
   // Called when the command is initially scheduled.
@@ -38,7 +40,7 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(outtake.getAsBoolean()) m_subsystem.intake(-1);
+    if(outtake.getAsBoolean() || shoot.getAsDouble() > 0.1) m_subsystem.intake(-1);
     else m_subsystem.intake(spd.getAsDouble());
   }
 
