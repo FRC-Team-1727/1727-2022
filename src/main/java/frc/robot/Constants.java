@@ -60,7 +60,7 @@ public final class Constants {
         public static final double kCloseSpeed = 17000;
 
         public static final double kConversionFactor = 5.091;
-        public static final int kSpeedTolerance = 200;
+        public static final int kSpeedTolerance = 400;
     }
 
     public static final class AimConstants {
@@ -81,7 +81,7 @@ public final class Constants {
 
         public static final int[] kClimbPort = new int[] {50,51};
         public static final double kClimbSpeed =  2; //0.1; //set the right speed (this is in rotations per tick)
-        public static final float kClimbMax = 170; //change to rotation value when climb is at full height
+        public static final float kClimbMax = 200; //change to rotation value when climb is at full height
 
         public static final double kP = .1;
         public static final double kI = 0.000001;

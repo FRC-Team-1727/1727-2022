@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -53,6 +54,9 @@ public class ClimbSubsystem extends SubsystemBase {
     controllers[0].setFeedbackDevice(motors[0].getEncoder());
     controllers[1].setFeedbackDevice(motors[1].getEncoder());
     position = 0;
+    for(CANSparkMax m : motors) {
+      m.getEncoder().setPosition(0);
+    }
     updateConstants();
   }
 

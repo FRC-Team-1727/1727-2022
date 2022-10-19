@@ -40,7 +40,10 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(outtake.getAsBoolean() || shoot.getAsDouble() > 0.1) m_subsystem.intake(-1);
+    // if(outtake.getAsBoolean() || shoot.getAsDouble() > 0.1) m_subsystem.intake(-1);
+    // else m_subsystem.intake(spd.getAsDouble());
+    if(outtake.getAsBoolean()) m_subsystem.intake(-1);
+    else if (shoot.getAsDouble() > 0.1) m_subsystem.intake(1);
     else m_subsystem.intake(spd.getAsDouble());
   }
 

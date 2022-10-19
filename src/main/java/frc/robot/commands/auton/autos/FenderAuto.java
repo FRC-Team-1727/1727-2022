@@ -5,6 +5,7 @@
 package frc.robot.commands.auton.autos;
 
 import frc.robot.commands.ShooterSpeedCommand;
+import frc.robot.commands.auton.DriveDistanceCommand;
 import frc.robot.commands.auton.UptakeAutoCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -21,9 +22,10 @@ public class FenderAuto extends SequentialCommandGroup {
       new ShooterSpeedCommand(shooter, kCloseSpeed),
       new WaitCommand(2),
       new UptakeAutoCommand(uptake, 1),
-      new WaitCommand(2),
+      new WaitCommand(3),
       new UptakeAutoCommand(uptake, 0),
-      new ShooterSpeedCommand(shooter, 0)
+      new ShooterSpeedCommand(shooter, 0),
+      new DriveDistanceCommand(drive, -100, 0.25)
     );
   }
 }
