@@ -15,6 +15,7 @@ import static frc.robot.Constants.XboxConstants.*;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import frc.robot.commands.auton.autos.FenderAuto;
+import frc.robot.commands.auton.autos.IntakeAuto;
 import frc.robot.commands.auton.autos.OneBallAuto;
 import frc.robot.commands.auton.autos.SimpleTwoBallAuto;
 import frc.robot.commands.auton.autos.TwoBallAuto;
@@ -50,7 +51,7 @@ public class RobotContainer {
   // private final CompressorSubsystem m_compressorSubsystem = new CompressorSubsystem();
 
   private final Command m_autoCommand = new FenderAuto(m_driveSubsystem, m_shooterSubsystem, m_uptakeSubsystem);
-  // private final Command m_autoCommand = new TwoBallAuto(m_driveSubsystem, m_shooterSubsystem, m_uptakeSubsystem, m_intakeSubsystem, m_visionSubsystem);
+  // private final Command m_autoCommand = new IntakeAuto(m_driveSubsystem, m_shooterSubsystem, m_intakeSubsystem);
 
   XboxController xbox = new XboxController(kXboxPort[0]);
   // XboxController xboxTwo = new XboxController(kXboxPort[1]);
