@@ -58,7 +58,7 @@ public final class Constants {
         public static final double kDefaultSpeed = 0;
         public static final double kFarSpeed = 13500;
         // public static final double kCloseSpeed = 17000;
-        public static final double kCloseSpeed = 12500;
+        public static final double kCloseSpeed = 6000;
 
         public static final double kConversionFactor = 5.091;
         public static final int kSpeedTolerance = 400;
